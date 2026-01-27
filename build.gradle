@@ -285,6 +285,9 @@ dependencies {
 
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
 
+    implementation fg.deobf("curse.maven:cupboard-326652:5470032")
+    implementation fg.deobf("curse.maven:respawning-structures-forge-fabric-969937:7513125")//结构重置
+
     //主要boss
     implementation fg.deobf("curse.maven:aether-255308:6134920")
     implementation fg.deobf("curse.maven:deep-aether-852465:6839617")
