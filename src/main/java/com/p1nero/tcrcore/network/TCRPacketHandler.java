@@ -23,6 +23,7 @@ public class TCRPacketHandler {
 
     public static synchronized void register() {
         register(AddWaypointPacket.class, AddWaypointPacket::decode);
+        register(RemoveWaypointPacket.class, RemoveWaypointPacket::decode);
 
         register(PlayTitlePacket.class, PlayTitlePacket::decode);
         register(PersistentBoolDataSyncPacket.class, PersistentBoolDataSyncPacket::decode);

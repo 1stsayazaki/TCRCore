@@ -32,7 +32,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
 
         this.addQuest(TCRQuests.TALK_TO_AINE_1, "序章", "和%s对话", "和%s说好了一起来到这个世界，但是当你回过神来后%s已经找不着人影了，快去圣殿里找找她吧！你依稀记得她好像说有什么新时装要给你。");
         this.addQuest(TCRQuests.TALK_TO_CHRONOS_1, "序章", "和？对话", "和%s说好了一起来到这个世界，但是当你回过神来后%s已经找不着人影了。这里到底是什么地方？和圣殿长廊中那位端庄的女人交流看看吧！");
-        this.addQuest(TCRQuests.TALK_TO_FERRY_GIRL_1, "序章", "和%s对话", "你已经听说了这个世界的故事，准备好了就前往码头寻找 %s 吧！她将为我们打开前往Overworld的路！");
+        this.addQuest(TCRQuests.TALK_TO_FERRY_GIRL_1, "序章", "前往Overworld", "你已经听说了这个世界的故事，准备好了就前往码头寻找 %s 吧！她将为我们打开前往Overworld的路！");
         this.addQuest(TCRQuests.TALK_TO_ORNN_1, "序章", "和%s对话", "在%s的建议下，先去武库找%s武装一下我们自己吧！充分的武装才能保证我们顺利的冒险！");
 
         this.addEffect(TCREffects.INVULNERABLE, "无敌");
@@ -92,6 +92,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "上面写着古老的神谕，暗示了火种散落的地方。回主城给守望者看看吧，说不定对冒险有帮助！");
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "§c多人模式请勿占据他人任务道具！每人都需各自提交！", 2);
 
+        this.addInfo("quest_map_mark", "任务点");
         this.addInfo("map_pos_marked_press_to_open", "已标记地点，按 [%s] 查看地图");
         this.addInfo("press_to_open_skill_tree", "按下 %s 以打开技能树");
         this.addInfo("press_to_show_quest_ui", "按 %s 键查看任务列表");
@@ -310,32 +311,10 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addDialogOption(TCREntities.ORNN.get(), 2, "§6锻造委托");
         this.addDialogOption(TCREntities.ORNN.get(), 3, "§a见面礼");
         this.addDialogAnswer(TCREntities.ORNN.get(), 4, "这是一些边角碎料所铸成的，你暂且拿去防身吧。");
-        this.addDialogOption(TCREntities.ORNN.get(), 4, "铁匕首");
-        this.addDialogOption(TCREntities.ORNN.get(), 5, "铁剑");
-        this.addDialogOption(TCREntities.ORNN.get(), 6, "金长剑");
-        this.addDialogOption(TCREntities.ORNN.get(), 7, "金太刀");
-        this.addDialogOption(TCREntities.ORNN.get(), 8, "金长矛");
-        this.addDialogOption(TCREntities.ORNN.get(), 9, "金大剑");
-
+        this.addDialogOption(TCREntities.ORNN.get(), 4, "%s");;
 
         this.addDialogAnswer(TCREntities.FERRY_GIRL.get(), 0, "阁下，好久不见！");
         this.addDialogAnswer(TCREntities.FERRY_GIRL.get(), 1, "阁下忘了我么？我是圣殿摆渡人，为众人指点迷津。阁下如有奇珍异宝，可与我瞧瞧，小女子可提取忆质，将其化为宝具！当你踏足过§c地狱§f或§d末地§f后，我也可以送你一程。");
-        this.addDialogAnswer(TCREntities.FERRY_GIRL.get(), 2, "阁下若是经验充足，可打开技能面板学习技能。在§6技能树界面右上角点击经验球，即可将经验化为技能点。§f技能加点十分重要，建议学习生命提升等提升生存能力的技能！");
-        this.addDialogAnswer(TCREntities.FERRY_GIRL.get(), 3, "我是圣殿摆渡人，为众人指点迷津。阁下如有奇珍异宝，可与我瞧瞧，小女子可提取忆质，将其化为宝具！当你踏足过§c地狱§f或§d末地§f后，我也可以送你一程。初次见面，此宝具赠与阁下，按下§d[%s]§f可开风帆，行万里！");
-        this.addDialogAnswer(TCREntities.FERRY_GIRL.get(), 4, "阁下，确定要前往吗？我无法将您送回来...请确保传送石带在身上了");
-        this.addDialogAnswer(TCREntities.FERRY_GIRL.get(), 5, "§d[%s]§f可通过遗迹宝箱或完成某些任务获取。阁下若是拥有§6[%s]§f，可按§d[%s]§f打开技能面板学习技能。技能加点十分重要，建议学习生命提升等提升生存能力的技能！");
-
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 0, "返回");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 1, "你是何人？");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 2, "神兵萃取");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 3, "甲胄提炼");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 4, "秘技学习");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 5, "打开技能树");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 6, "前往地狱");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 7, "前往末地");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 8, "确定");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 9, "饰品提取");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 10, "§a前往主世界§f");
 
         this.addDialogAnswer(NFIEntities.ARTERIUS.get(), 0, "异界之人，你为何来此？");
         this.addDialogAnswer(NFIEntities.ARTERIUS.get(), 1, "哈哈哈，守望者将烈焰之眼托付于我，为的是避免落入不义之人手中。即使是她老人家亲自来了，也得过我这关！我倒是要看看，你有没有这个能耐！");

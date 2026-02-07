@@ -77,7 +77,7 @@ public class ClientForgeEvents {
     @SubscribeEvent
     public static void onRenderGui(RenderGuiEvent.Pre event) {
         if(!Minecraft.getInstance().isPaused() && Minecraft.getInstance().screen == null && Minecraft.getInstance().player != null) {
-            CustomQuestOverlayRenderer.render(Minecraft.getInstance().player, event.getGuiGraphics(), event.getWindow(), event.getPartialTick());
+            CustomQuestOverlayRenderer.render(Minecraft.getInstance().player, event.getGuiGraphics(), event.getPartialTick());
         }
     }
 

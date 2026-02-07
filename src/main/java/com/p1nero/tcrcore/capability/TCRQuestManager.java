@@ -1,8 +1,11 @@
 package com.p1nero.tcrcore.capability;
 
 import com.p1nero.fast_tpa.network.PacketRelay;
+import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.network.TCRPacketHandler;
 import com.p1nero.tcrcore.network.packet.clientbound.RefreshClientQuestsPacket;
+import com.p1nero.tcrcore.utils.WaypointUtil;
+import dev.ftb.mods.ftbquests.quest.Quest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -11,6 +14,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
+import xaero.common.minimap.waypoints.WaypointVisibilityType;
+import xaero.hud.minimap.waypoint.WaypointColor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -63,6 +68,10 @@ public class TCRQuestManager {
         ensureQuest(player);
         tcrPlayer.syncToClient(player);
         PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new RefreshClientQuestsPacket(), player);
+        //大地图标点，仅大地图可见
+        if(quest.getTrackingPos() != null && quest.getDimension().equals(player.level().dimension())) {
+            WaypointUtil.sendWaypoint(player, TCRCoreMod.getInfoKey("quest_map_mark"), quest.getTrackingPos(), WaypointColor.GOLD, WaypointVisibilityType.WORLD_MAP_LOCAL);
+        }
     }
 
     public static void finishQuest(ServerPlayer player, Quest quest) {
@@ -81,6 +90,10 @@ public class TCRQuestManager {
         ensureQuest(player);
         tcrPlayer.syncToClient(player);
         PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new RefreshClientQuestsPacket(), player);
+        //移除大地图标点
+        if(quest.getTrackingPos() != null && quest.getDimension().equals(player.level().dimension())) {
+            WaypointUtil.removeWaypoint(player, TCRCoreMod.getInfoKey("quest_map_mark"), quest.getTrackingPos());
+        }
     }
 
     /**

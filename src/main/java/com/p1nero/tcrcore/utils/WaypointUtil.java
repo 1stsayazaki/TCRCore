@@ -4,6 +4,7 @@ import com.p1nero.fast_tpa.network.PacketRelay;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.network.TCRPacketHandler;
 import com.p1nero.tcrcore.network.packet.clientbound.AddWaypointPacket;
+import com.p1nero.tcrcore.network.packet.clientbound.RemoveWaypointPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -28,19 +29,27 @@ import java.util.ArrayList;
 @SuppressWarnings("deprecation")
 public class WaypointUtil {
 
+    public static void sendWaypoint(ServerPlayer player, String key, BlockPos pos, WaypointColor color, WaypointVisibilityType type) {
+        PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new AddWaypointPacket(key, pos, color, type), player);
+    }
+
     public static void sendWaypoint(ServerPlayer player, String key, BlockPos pos, WaypointColor color) {
-        PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new AddWaypointPacket(key, pos, color), player);
+        PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new AddWaypointPacket(key, pos, color, WaypointVisibilityType.LOCAL), player);
+    }
+
+    public static void removeWaypoint(ServerPlayer player, String key, BlockPos pos) {
+        PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new RemoveWaypointPacket(key, pos), player);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void addWayPoint(BlockPos pos, String name, @Nullable WaypointColor color){
+    public static void addWayPoint(BlockPos pos, String name, @Nullable WaypointColor color, WaypointVisibilityType type){
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             ArrayList<Waypoint> waypoints = getWaypoints(Minecraft.getInstance().player);
             if(waypoints.stream().anyMatch((waypoint -> isEqualWaypoint(waypoint, name, pos)))){
                 return;
             }
             Waypoint instant = new Waypoint(pos.getX(), pos.getY() + 2, pos.getZ(), name, name.substring(0, 1), color == null ? WaypointColor.getRandom() : color , WaypointPurpose.NORMAL, false);
-            instant.setVisibility(WaypointVisibilityType.LOCAL);
+            instant.setVisibility(type);
             waypoints.add(instant);
             save(Minecraft.getInstance().player);
             Minecraft.getInstance().player.displayClientMessage(TCRCoreMod.getInfo("map_pos_marked_press_to_open", ControlsRegister.keyOpenMap.getTranslatedKeyMessage().copy().withStyle(ChatFormatting.GOLD)), false);

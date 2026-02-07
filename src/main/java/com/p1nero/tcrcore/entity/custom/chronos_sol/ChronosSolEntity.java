@@ -161,10 +161,15 @@ public class ChronosSolEntity extends PathfinderMob implements IEntityNpc, GeoEn
 
         if(TCRQuests.TALK_TO_CHRONOS_1.equals(currentQuest)) {
             //初次对话
-            root = new DialogNode(dBuilder.ans(6));
+            root = new DialogNode(dBuilder.ans(6), dBuilder.opt(-3));
             //你是何人
             DialogNode aboutMe = new DialogNode(dBuilder.ans(7, TCREntities.CHRONOS_SOL.get().getDescription()), dBuilder.opt(4))
                     .addChild(new DialogNode(dBuilder.ans(8), dBuilder.opt(5))
+                            .addChild(root)
+                            .addLeaf(dBuilder.opt(-2)));
+
+            aboutThisWorld = new DialogNode(dBuilder.ans(1), dBuilder.opt(0))
+                    .addChild(new DialogNode(dBuilder.ans(2), dBuilder.opt(-1))
                             .addChild(root)
                             .addLeaf(dBuilder.opt(-2)));
             //关于接下来的行动

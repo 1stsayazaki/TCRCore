@@ -27,6 +27,7 @@ public class TCRKeyMappings {
 	@SubscribeEvent
 	public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
 		event.register(RIPTIDE);
+        event.register(SHOW_QUESTS);
 	}
 
 	@Mod.EventBusSubscriber(modid = TCRCoreMod.MOD_ID, value = Dist.CLIENT)

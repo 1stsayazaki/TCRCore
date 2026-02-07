@@ -7,8 +7,11 @@ import com.p1nero.dialog_lib.api.entity.custom.IEntityNpc;
 import com.p1nero.dialog_lib.api.entity.goal.LookAtConservingPlayerGoal;
 import com.p1nero.dialog_lib.client.screen.DialogueScreen;
 import com.p1nero.dialog_lib.client.screen.builder.DialogueScreenBuilder;
+import com.p1nero.dialog_lib.client.screen.builder.StreamDialogueScreenBuilder;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.capability.PlayerDataManager;
+import com.p1nero.tcrcore.capability.TCRQuestManager;
+import com.p1nero.tcrcore.capability.TCRQuests;
 import com.p1nero.tcrcore.events.OverworldVillageTeleporter;
 import com.p1nero.tcrcore.events.PlayerEventListeners;
 import com.p1nero.tcrcore.events.SafeNetherTeleporter;
@@ -22,6 +25,7 @@ import net.genzyuro.uniqueaccessories.item.UAUniqueCurioItem;
 import net.genzyuro.uniqueaccessories.registry.UAItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -151,8 +155,7 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
                 PlayerDataManager.ferryGirlTalked.put(player, true);
             }
             CompoundTag tag = new CompoundTag();
-            tag.putBoolean("nether_dim_unlock", PlayerDataManager.netherEntered.get(player));
-            tag.putBoolean("end_dim_unlock", PlayerDataManager.endEntered.get(player));
+
             this.sendDialogTo(serverPlayer, tag);
         }
         return InteractionResult.sidedSuccess(level().isClientSide);
@@ -169,14 +172,23 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
     @OnlyIn(Dist.CLIENT)
     @Override
     public DialogueScreen getDialogueScreen(CompoundTag compoundTag) {
-        DialogueScreenBuilder treeBuilder = new DialogueScreenBuilder(this, TCRCoreMod.MOD_ID);
+        LocalPlayer localPlayer = Minecraft.getInstance().player;
+        if(localPlayer == null) {
+            return null;
+        }
+        TCRQuestManager.Quest currentQuest = TCRQuestManager.getCurrentQuest(localPlayer);
+        StreamDialogueScreenBuilder treeBuilder = new StreamDialogueScreenBuilder(this, TCRCoreMod.MOD_ID);
         DialogueComponentBuilder dBuilder = treeBuilder.getComponentBuildr();
 
-            DialogNode root = new DialogNode(dBuilder.ans(0), dBuilder.optWithBrackets(0));
+        DialogNode root = new DialogNode(dBuilder.ans(0), dBuilder.optWithBrackets(0));
 
+        if(currentQuest.equals(TCRQuests.TALK_TO_FERRY_GIRL_1)) {
 
-            return treeBuilder.buildWith(root);
-//        }
+        } else {
+
+        }
+
+        return treeBuilder.buildWith(root);
     }
 
     @Override

@@ -101,7 +101,7 @@ public class CustomQuestOverlayRenderer {
         updateQuestIndicators(localPlayer, window);
     }
 
-    public static void render(LocalPlayer localPlayer, GuiGraphics guiGraphics, Window window, float partialTick) {
+    public static void render(LocalPlayer localPlayer, GuiGraphics guiGraphics, float partialTick) {
         Minecraft minecraft = Minecraft.getInstance();
         float interpolatedTime = timeSinceStateChange + partialTick;
 
@@ -155,25 +155,27 @@ public class CustomQuestOverlayRenderer {
         RenderSystem.disableBlend();
         guiGraphics.pose().popPose();
 
-        renderQuestTargetIndicator(localPlayer, guiGraphics, window, partialTick);
+        renderQuestTargetIndicator(localPlayer, guiGraphics, partialTick);
 
     }
 
     /**
      * 画任务的目标指示器
      */
-    public static void renderQuestTargetIndicator(LocalPlayer localPlayer, GuiGraphics guiGraphics, Window window, float partialTick) {
+    public static void renderQuestTargetIndicator(LocalPlayer localPlayer, GuiGraphics guiGraphics, float partialTick) {
         if (localPlayer == null || QUEST_INDICATOR_INFOS.isEmpty()) {
             return;
         }
         Minecraft minecraft = Minecraft.getInstance();
 
-        RenderSystem.enableBlend();
-        guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         for (QuestIndicatorInfo info : QUEST_INDICATOR_INFOS) {
             float iconX = Mth.lerp(partialTick, info.lastIconX, info.iconX);
             float iconY = Mth.lerp(partialTick, info.lastIconY, info.iconY);
+
+            RenderSystem.enableBlend();
+            //非追踪的则画透明点
+            guiGraphics.setColor(1.0f, 1.0f, 1.0f, info.quest.equals(currentQuest) ? 1.0F : 0.5F);
 
             guiGraphics.blit(info.icon, (int) iconX, (int) iconY, 0, 0, QUEST_ICON_SIZE, QUEST_ICON_SIZE, QUEST_ICON_SIZE, QUEST_ICON_SIZE);
 
@@ -194,9 +196,10 @@ public class CustomQuestOverlayRenderer {
                 guiGraphics.blit(QUEST_ARROW_ICON, -QUEST_ICON_SIZE / 2, -QUEST_ICON_SIZE / 2 - QUEST_ICON_SIZE, 0, 0, QUEST_ICON_SIZE, QUEST_ICON_SIZE, QUEST_ICON_SIZE, QUEST_ICON_SIZE);
                 guiGraphics.pose().popPose();
             }
-        }
 
-        RenderSystem.disableBlend();
+            guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+            RenderSystem.disableBlend();
+        }
     }
 
     private static void updateQuestIndicators(LocalPlayer localPlayer, Window window) {
@@ -279,9 +282,10 @@ public class CustomQuestOverlayRenderer {
         Vec3 targetPos = Vec3.atCenterOf(pos);
 
         double distance = localPlayer.position().distanceTo(targetPos);
-        if (distance < QUEST_INDICATOR_MIN_DISTANCE) {
-            return null;
-        }
+
+//        if (distance < QUEST_INDICATOR_MIN_DISTANCE) {
+//            return null;
+//        }
 
         Vec3 camToTarget = targetPos.subtract(camPos);
         if (camToTarget.lengthSqr() < 1.0e-4) {

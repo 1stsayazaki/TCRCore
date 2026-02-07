@@ -7,34 +7,25 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
-import xaero.common.minimap.waypoints.WaypointVisibilityType;
 import xaero.hud.minimap.waypoint.WaypointColor;
 
-public record AddWaypointPacket(String name, BlockPos pos, @Nullable WaypointColor color, WaypointVisibilityType type) implements BasePacket {
+public record RemoveWaypointPacket(String name, BlockPos pos) implements BasePacket {
     @Override
     public void encode(FriendlyByteBuf buf) {
         buf.writeUtf(name);
         buf.writeBlockPos(pos);
-        if(color == null) {
-            buf.writeUtf("null");
-        } else {
-            buf.writeUtf(color.name());
-        }
-        buf.writeEnum(type);
     }
 
-    public static AddWaypointPacket decode(FriendlyByteBuf buf) {
+    public static RemoveWaypointPacket decode(FriendlyByteBuf buf) {
         String name = buf.readUtf();
         BlockPos blockPos = buf.readBlockPos();
-        String color = buf.readUtf();
-        WaypointVisibilityType type = buf.readEnum(WaypointVisibilityType.class);
-        return new AddWaypointPacket(name, blockPos, color.equals("null") ? null : WaypointColor.valueOf(color), type);
+        return new RemoveWaypointPacket(name, blockPos);
     }
 
     @Override
     public void execute(@Nullable Player playerEntity) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
-            WaypointUtil.addWayPoint(pos, name, color, type);
+            WaypointUtil.removeWayPoint(pos, name);
         }
     }
 }
