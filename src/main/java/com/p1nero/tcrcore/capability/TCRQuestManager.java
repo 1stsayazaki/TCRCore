@@ -63,7 +63,7 @@ public class TCRQuestManager {
     }
 
     public static void startQuest(ServerPlayer player, Quest quest) {
-        startQuest(player, quest, false);
+        startQuest(player, quest, true);
     }
 
     public static void startQuest(ServerPlayer player, Quest quest, boolean changeCurrentTask) {

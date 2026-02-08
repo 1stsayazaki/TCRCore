@@ -24,6 +24,11 @@ import com.yesman.epicskills.client.input.EpicSkillsKeyMappings;
 import net.blay09.mods.waystones.block.ModBlocks;
 import net.genzyuro.uniqueaccessories.item.UAUniqueCurioItem;
 import net.genzyuro.uniqueaccessories.registry.UAItems;
+import net.magister.bookofdragons.entity.ModEntities;
+import net.magister.bookofdragons.entity.base.dragon.DragonBase;
+import net.magister.bookofdragons.entity.util.DragonType;
+import net.magister.bookofdragons.entity.util.DragonVariantConfig;
+import net.magister.bookofdragons.item.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -36,10 +41,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -66,8 +73,10 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import yesman.epicfight.client.world.capabilites.entitypatch.player.LocalPlayerPatch;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
+import yesman.epicfight.world.item.EpicFightItems;
 
 import java.util.List;
+import java.util.UUID;
 
 public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEntity, Merchant {
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
@@ -98,14 +107,14 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
     @Override
     public void tick() {
         super.tick();
-        if(!level().isClientSide) {
-            if(tickCount % 100 == 0) {
+        if (!level().isClientSide) {
+            if (tickCount % 100 == 0) {
                 BlockPos myPos = this.getOnPos();
-                if(myPos.getX() != WorldUtil.FERRY_GIRL_POS.getX() || myPos.getZ() != WorldUtil.FERRY_GIRL_POS.getZ()) {
+                if (myPos.getX() != WorldUtil.FERRY_GIRL_POS.getX() || myPos.getZ() != WorldUtil.FERRY_GIRL_POS.getZ()) {
                     this.setPos(new BlockPos(WorldUtil.FERRY_GIRL_POS).getCenter());
                 }
             }
-            if(getConversingPlayer() != null && (getConversingPlayer().isRemoved() || getConversingPlayer().isDeadOrDying() || getConversingPlayer().distanceTo(this) > 5)) {
+            if (getConversingPlayer() != null && (getConversingPlayer().isRemoved() || getConversingPlayer().isDeadOrDying() || getConversingPlayer().distanceTo(this) > 5)) {
                 setConversingPlayer(null);
             }
         }
@@ -120,11 +129,11 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
                 142857, 0, 0.02f));
 
         ForgeRegistries.ITEMS.getValues().forEach(item -> {
-            if(PlayerEventListeners.illegalItems.contains(item)) {
+            if (PlayerEventListeners.illegalItems.contains(item)) {
                 return;
             }
-            if(item instanceof ArtifactItem || item instanceof UAUniqueCurioItem) {
-                if(rareItems.contains(item)) {
+            if (item instanceof ArtifactItem || item instanceof UAUniqueCurioItem) {
+                if (rareItems.contains(item)) {
                     offersArtifact.add(new MerchantOffer(
                             new ItemStack(TCRItems.RARE_ARTIFACT_TICKET.get(), 1),
                             new ItemStack(item, 1),
@@ -141,7 +150,7 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
 
     @Override
     public boolean hurt(@NotNull DamageSource damageSource, float p_21017_) {
-        if(damageSource.getEntity() instanceof Player player && player.isCreative()) {
+        if (damageSource.getEntity() instanceof Player player && player.isCreative()) {
             player.displayClientMessage(Component.translatable("/summon " + ForgeRegistries.ENTITY_TYPES.getKey(this.getType())).withStyle(ChatFormatting.RED), false);
             this.discard();
         }
@@ -152,11 +161,11 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
     protected @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
         initMerchant();
         if (player instanceof ServerPlayer serverPlayer) {
-            if(!PlayerDataManager.ferryGirlTalked.get(player)) {
+            if (!PlayerDataManager.ferryGirlTalked.get(player)) {
                 PlayerDataManager.ferryGirlTalked.put(player, true);
             }
             CompoundTag tag = new CompoundTag();
-
+            tag.putBoolean("can_go_overworld", TCRQuestManager.hasFinished(serverPlayer, TCRQuests.TALK_TO_CHRONOS_1));
             this.sendDialogTo(serverPlayer, tag);
         }
         return InteractionResult.sidedSuccess(level().isClientSide);
@@ -174,9 +183,10 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
     @Override
     public DialogueScreen getDialogueScreen(CompoundTag compoundTag) {
         LocalPlayer localPlayer = Minecraft.getInstance().player;
-        if(localPlayer == null) {
+        if (localPlayer == null) {
             return null;
         }
+        boolean canGoOverworld = compoundTag.getBoolean("can_go_overworld");
         TCRQuestManager.Quest currentQuest = TCRQuestManager.getCurrentQuest(localPlayer);
         StreamDialogueScreenBuilder treeBuilder = new StreamDialogueScreenBuilder(this, TCRCoreMod.MOD_ID);
         DialogueComponentBuilder dBuilder = treeBuilder.getComponentBuildr();
@@ -196,27 +206,35 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
         DialogNode goToOverworld = new DialogNode.FinalNode(dBuilder.opt(3), 2);
 
         DialogNode gift = new DialogNode(dBuilder.ans(4), dBuilder.opt(4))
-                .addLeaf(dBuilder.opt(5), 3);
+                .addLeaf(dBuilder.opt(5, ModEntities.NIGHTFURY.get().getDescription()), 3)
+                .addLeaf(dBuilder.opt(5, ModEntities.DEADLYNADDER.get().getDescription()), 4)
+                .addLeaf(dBuilder.opt(5, ModEntities.GRONCKLE.get().getDescription()), 5)
+                .addLeaf(dBuilder.opt(5, ModEntities.SKRILL.get().getDescription()), 6)
+                .addLeaf(dBuilder.opt(5, ModEntities.HIDDEOUS_ZIPPLEBACK.get().getDescription()), 7)
+                .addLeaf(dBuilder.opt(5, ModEntities.MONSTROUSNIGHTMARE.get().getDescription()), 8)
+                .addLeaf(dBuilder.opt(5, ModEntities.WHISPERING_DEATH.get().getDescription()), 9);
 
-        if(currentQuest.equals(TCRQuests.TALK_TO_FERRY_GIRL_1)) {
+        if (currentQuest.equals(TCRQuests.TALK_TO_FERRY_GIRL_1)) {
             root.addChild(whoAreU);
-        } else {
-
         }
-        if(PlayerDataManager.chonosTalked.get(localPlayer)) {
+        if (PlayerDataManager.chonosTalked.get(localPlayer)) {
             root.addChild(aboutChronos);
         }
-        if(PlayerDataManager.ornnTalked.get(localPlayer)) {
+        if (PlayerDataManager.ornnTalked.get(localPlayer)) {
             root.addChild(aboutOrnn);
         }
 
-        if(!PlayerDataManager.ferryGirlGiftGet.get(localPlayer)) {
+        if (!PlayerDataManager.ferryGirlGiftGet.get(localPlayer)) {
             root.addChild(gift);
         }
 
-        root.addChild(tradeArtifact)
-                .addChild(goToOverworld)
-                .addLeaf(dBuilder.opt(-3));
+        root.addChild(tradeArtifact);
+
+        if(canGoOverworld) {
+            root.addChild(goToOverworld);
+        }
+
+        root.addLeaf(dBuilder.opt(-2));
 
         return treeBuilder.buildWith(root);
     }
@@ -224,18 +242,18 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
     @Override
     public void handleNpcInteraction(ServerPlayer serverPlayer, int i) {
         TCRQuestManager.Quest currentQuest = TCRQuestManager.getCurrentQuest(serverPlayer);
-        if(i == 1) {
+        if (i == 1) {
             offers.addAll(offersArtifact);
             startTrade(serverPlayer);
         }
 
-        if(i == 2) {
-            if(PlayerDataManager.wayStoneInteracted.get(serverPlayer)){
+        if (i == 2) {
+            if (PlayerDataManager.wayStoneInteracted.get(serverPlayer)) {
                 //传送主世界
                 ServerLevel level = serverPlayer.server.getLevel(Level.OVERWORLD);
                 serverPlayer.changeDimension(level, new OverworldVillageTeleporter());
                 //后续的搞到PlayerDimensionChanged事件来
-                if(currentQuest.equals(TCRQuests.TALK_TO_FERRY_GIRL_1)) {
+                if (currentQuest.equals(TCRQuests.TALK_TO_FERRY_GIRL_1)) {
                     TCRQuests.TALK_TO_FERRY_GIRL_1.finish(serverPlayer);
                     TCRQuests.USE_RESONANCE_STONE_1.start(serverPlayer);
                 }
@@ -244,10 +262,55 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
             }
         }
 
-        //获得龙龙，以及养大龙龙的任务
-        if(i == 3) {
+        EntityType<? extends Mob> type =  ModEntities.NIGHTFURY.get();
+        if (i == 3) {
+            type =  ModEntities.NIGHTFURY.get();
+        }
+        if (i == 4) {
+            type =  ModEntities.DEADLYNADDER.get();
+        }
+        if (i == 5) {
+            type =  ModEntities.GRONCKLE.get();
+        }
+        if (i == 6) {
+            type =  ModEntities.SKRILL.get();
+        }
+        if (i == 7) {
+            type =  ModEntities.HIDDEOUS_ZIPPLEBACK.get();
+        }
+        if (i == 8) {
+            type =  ModEntities.MONSTROUSNIGHTMARE.get();
+        }
+        if (i == 9) {
+            type =  ModEntities.WHISPERING_DEATH.get();
+        }
 
-            TCRQuests.TAME_DRAGON.start(serverPlayer);
+        //获得龙龙，以及养大龙龙的任务
+        if (i >= 3 && i <= 9) {
+            Mob babyDragon = type.create(serverPlayer.serverLevel());
+            if (babyDragon != null) {
+                if (babyDragon instanceof DragonBase dragonBase) {
+                    int inheritedVariant;
+                    if (this.random.nextFloat() < 0.1F) {
+                        String dragonTypeName = dragonBase.getDragonType().name().toLowerCase();
+                        inheritedVariant = DragonVariantConfig.selectWeightedVariant(dragonTypeName, this.random);
+                    } else {
+                        inheritedVariant = 0;
+                    }
+
+                    dragonBase.setVariant(inheritedVariant);
+                    dragonBase.tame(serverPlayer);
+
+                    dragonBase.setAge(-24000);
+                    dragonBase.startSpawnAnimation();
+                }
+
+                babyDragon.moveTo(serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), this.random.nextFloat() * 360.0F, 0.0F);
+                serverPlayer.serverLevel().addFreshEntity(babyDragon);
+                this.level().playSound(null, this.blockPosition(), SoundEvents.TURTLE_EGG_HATCH, SoundSource.NEUTRAL, 1.0F, 1.0F);
+            }
+            ItemUtil.addItemEntity(serverPlayer, ModItems.BOOK_OF_DRAGONS.get().getDefaultInstance());
+            TCRQuests.TAME_DRAGON.start(serverPlayer, false);
         }
 
         this.setConversingPlayer(null);
@@ -271,7 +334,7 @@ public class FerryGirlEntity extends PathfinderMob implements IEntityNpc, GeoEnt
      * 开始交易
      * 需要改变交易表则去重写 {@link #getOffers()}
      */
-    public void startTrade(ServerPlayer serverPlayer){
+    public void startTrade(ServerPlayer serverPlayer) {
         setTradingPlayer(serverPlayer);
         openTradingScreen(serverPlayer, Component.empty(), 1);
     }

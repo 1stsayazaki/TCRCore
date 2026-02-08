@@ -35,6 +35,8 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addQuest(TCRQuests.TALK_TO_FERRY_GIRL_1, "序章", "前往Overworld", "你已经听说了这个世界的故事，准备好了就前往码头寻找 %s 吧！她将为我们打开前往Overworld的路！她似乎有什么宝贝要送给你。");
         this.addQuest(TCRQuests.TALK_TO_ORNN_1, "序章", "和%s对话", "在%s的建议下，先去武库找%s武装一下我们自己吧！充分的武装才能保证我们顺利的冒险！");
 
+        this.addQuest(TCRQuests.TAME_DRAGON, "驯龙之章", "将龙养大", "%s送给了你一条龙，现在，按[%s]上说的办法，将它养成年吧！龙，可是帝王之征！");
+
         this.addEffect(TCREffects.INVULNERABLE, "无敌");
         this.addEffect(TCREffects.SOUL_INCINERATOR, "灵魂火");
 
@@ -72,6 +74,8 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addSkill("fire_avoid", "避火咒", "免疫火焰伤害！");
         this.addSkill("perfect_dodge", "闪避特效", "完美闪避时将有帅气的动作！");
 
+        this.add(TCRItems.DRAGON_BALL.get(), "龙之球");
+        this.addItemUsageInfo(TCRItems.DRAGON_BALL.get(), "右键可收服龙，再次右键可释放龙。");
         this.add(TCRItems.RESONANCE_STONE.get(), "共鸣石");
         this.addItemUsageInfo(TCRItems.RESONANCE_STONE.get(), "可与使徒封印的位置共鸣。");
         this.add(TCRItems.CORE_FLINT.get(), "炉心火石");
@@ -92,6 +96,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "上面写着古老的神谕，暗示了火种散落的地方。回主城给守望者看看吧，说不定对冒险有帮助！");
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "§c多人模式请勿占据他人任务道具！每人都需各自提交！", 2);
 
+        this.addInfo("only_work_on_dragon", "龙之球仅能作用于龙");
         this.addInfo("quest_map_mark", "任务点");
         this.addInfo("map_pos_marked_press_to_open", "已标记地点，按 [%s] 查看地图");
         this.addInfo("press_to_open_skill_tree", "按下 %s 以打开技能树");
@@ -326,7 +331,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addDialogOption(TCREntities.FERRY_GIRL.get(), 3, "§a前往主世界");
         this.addDialogOption(TCREntities.FERRY_GIRL.get(), 4, "§6见面礼");
         this.addDialogAnswer(TCREntities.FERRY_GIRL.get(), 4, "一份微薄的礼物，还望阁下笑纳。此灵宠孵化成年之后，可日行万里，希望对阁下主世界之旅有所帮助！§6当阁下将灵宠养大后，再来找我吧。");
-        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 5, "§6收下");
+        this.addDialogOption(TCREntities.FERRY_GIRL.get(), 5, "§6选择[%s§6]");
 
         this.addDialogAnswer(NFIEntities.ARTERIUS.get(), 0, "异界之人，你为何来此？");
         this.addDialogAnswer(NFIEntities.ARTERIUS.get(), 1, "哈哈哈，守望者将烈焰之眼托付于我，为的是避免落入不义之人手中。即使是她老人家亲自来了，也得过我这关！我倒是要看看，你有没有这个能耐！");

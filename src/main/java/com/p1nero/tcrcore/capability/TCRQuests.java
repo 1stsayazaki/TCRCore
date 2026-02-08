@@ -1,12 +1,18 @@
 package com.p1nero.tcrcore.capability;
 
+import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.capability.TCRQuestManager.Quest;
 import com.p1nero.tcrcore.entity.TCREntities;
 import com.p1nero.tcrcore.utils.WorldUtil;
 import com.p1nero.tcrcore.worldgen.TCRDimensions;
+import net.magister.bookofdragons.item.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 
 public class TCRQuests {
+
+    public static final ResourceLocation SIDE_QUEST_1 = ResourceLocation.fromNamespaceAndPath(TCRCoreMod.MOD_ID, "textures/gui/side_quest_1.png");
+    public static final ResourceLocation SIDE_QUEST_2 = ResourceLocation.fromNamespaceAndPath(TCRCoreMod.MOD_ID, "textures/gui/side_quest_2.png");
 
     //序章
     public static Quest TALK_TO_AINE_1;
@@ -38,6 +44,9 @@ public class TCRQuests {
                 .descParam(TCREntities.CHRONOS_SOL.get().getDescription(), TCREntities.ORNN.get().getDescription())
                 .withTrackingPos(new BlockPos(WorldUtil.ORNN_POS.above(3)), TCRDimensions.SANCTUM_LEVEL_KEY);
 
+        TAME_DRAGON = TCRQuestManager.create("tame_dragon")
+                .withIcon(SIDE_QUEST_1)
+                .descParam(TCREntities.FERRY_GIRL.get().getDescription(), ModItems.BOOK_OF_DRAGONS.get().getDescription());
 
     }
 }
