@@ -9,9 +9,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.violetmoon.quark.content.mobs.entity.Forgotten;
+import org.violetmoon.quark.content.mobs.module.ForgottenModule;
 
 @Mod.EventBusSubscriber(modid = TCRCoreMod.MOD_ID)
 public class BlockEvents {
@@ -41,6 +44,18 @@ public class BlockEvents {
                 if(!TCRDimSaveData.get(serverLevel).isBossKilled()) {
                     event.getPlayer().displayClientMessage(TCRCoreMod.getInfo("dim_block_no_interact"), true);
                     event.setCanceled(true);
+                }
+            }
+            //在呱呱村庄打爆紫水晶块概率出遗忘者
+            if(WorldUtil.isInStructure(event.getPlayer(), WorldUtil.RIBBIT_VILLAGE)){
+                if(event.getState().is(Blocks.AMETHYST_BLOCK)) {
+                    if(serverLevel.random.nextBoolean()) {
+                        Forgotten forgotten = ForgottenModule.forgottenType.spawn(serverLevel, event.getPos(), MobSpawnType.SPAWNER);
+                        if(forgotten != null) {
+                            forgotten.setTarget(event.getPlayer());
+                            forgotten.setGlowingTag(true);
+                        }
+                    }
                 }
             }
         }

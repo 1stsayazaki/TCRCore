@@ -108,7 +108,7 @@ public class AineIrisEntity extends PathfinderMob implements IEntityNpc, GeoEnti
                     .addLeaf(dBuilder.opt(3), 1);
             root.addChild(aboutSkin);
         } else if(currentQuest.equals(TCRQuests.TALK_TO_AINE_CLOUDLAND)) {
-            dialogueScreenBuilder.start(dBuilder.opt(4, localPlayer.getDisplayName()))
+            dialogueScreenBuilder.start(dBuilder.ans(4, localPlayer.getDisplayName()))
                     .addOption(5, 5)
                     .addOption(-1, 6)
                     .addOption(-1, 7)

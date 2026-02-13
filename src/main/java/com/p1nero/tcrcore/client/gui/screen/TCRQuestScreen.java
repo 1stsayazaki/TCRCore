@@ -31,6 +31,8 @@ public class TCRQuestScreen extends Screen {
     public static final ResourceLocation DEFAULT_QUEST_ICON_TEXTURE = ResourceLocation.fromNamespaceAndPath(TCRCoreMod.MOD_ID, "textures/gui/quest_icon.png");
     public static final ResourceLocation QUEST_BORDER_TEXTURE = ResourceLocation.fromNamespaceAndPath(TCRCoreMod.MOD_ID, "textures/gui/quest_border.png");
     public static final ResourceLocation QUEST_BORDER_SMALL_TEXTURE = ResourceLocation.fromNamespaceAndPath(TCRCoreMod.MOD_ID, "textures/gui/quest_border_small.png");
+    public static final ResourceLocation QUEST_BORDER_SMALL_SELECTED_TEXTURE = ResourceLocation.fromNamespaceAndPath(TCRCoreMod.MOD_ID, "textures/gui/quest_border_small_selected.png");
+    public static final ResourceLocation QUEST_BORDER_SMALL_HOVER_TEXTURE = ResourceLocation.fromNamespaceAndPath(TCRCoreMod.MOD_ID, "textures/gui/quest_border_small_hover.png");
 
     private static final int LIST_WIDTH = 220;
     private static final int LIST_MARGIN_VERTICAL = 24;
@@ -198,12 +200,14 @@ public class TCRQuestScreen extends Screen {
     private void renderQuestEntry(GuiGraphics guiGraphics, TCRQuestManager.Quest quest, int index, int top, int entryHeight, boolean hovered, boolean selected) {
         int left = listX0;
         int right = listX1;
-        drawNineSlice(guiGraphics, QUEST_BORDER_SMALL_TEXTURE, left, top, right - left, entryHeight, 5, 32, 32);
         if (selected) {
-            guiGraphics.fill(left, top, right, top + entryHeight, 0x804080FF);
+            drawNineSlice(guiGraphics, QUEST_BORDER_SMALL_SELECTED_TEXTURE, left, top, right - left, entryHeight, 5, 32, 32);
         } else if (hovered) {
-            guiGraphics.fill(left, top, right, top + entryHeight, 0x404080FF);
+            drawNineSlice(guiGraphics, QUEST_BORDER_SMALL_HOVER_TEXTURE, left, top, right - left, entryHeight, 5, 32, 32);
+        } else {
+            drawNineSlice(guiGraphics, QUEST_BORDER_SMALL_TEXTURE, left, top, right - left, entryHeight, 5, 32, 32);
         }
+        top++;
         int iconX = left + ENTRY_PADDING;
         int iconY = top + ENTRY_PADDING;
         ResourceLocation currentIcon = quest.getIcon() == null ? DEFAULT_QUEST_ICON_TEXTURE : quest.getIcon();
@@ -221,8 +225,8 @@ public class TCRQuestScreen extends Screen {
         }
         textY += font.lineHeight + 2;
         guiGraphics.drawString(font, quest.getShortDesc(), textX, textY, shortDescColor, false);
-        int separatorColor = 0x60FFFFFF;
-        guiGraphics.fill(left + 2, top + entryHeight - 1, right - 2, top + entryHeight, separatorColor);
+//        int separatorColor = 0x60FFFFFF;
+//        guiGraphics.fill(left + 2, top + entryHeight - 1, right - 2, top + entryHeight, separatorColor);
     }
 
     private void renderScrollbar(GuiGraphics guiGraphics, int contentHeight) {

@@ -4,9 +4,11 @@ import com.github.dodo.dodosmobs.init.ModEntities;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.capability.TCRQuestManager.Quest;
 import com.p1nero.tcrcore.entity.TCREntities;
+import com.p1nero.tcrcore.gameassets.TCRSkills;
 import com.p1nero.tcrcore.item.TCRItems;
 import com.p1nero.tcrcore.utils.WorldUtil;
 import com.p1nero.tcrcore.worldgen.TCRDimensions;
+import com.yungnickyoung.minecraft.ribbits.module.EntityTypeModule;
 import net.magister.bookofdragons.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -63,6 +65,7 @@ public class TCRQuests {
     public static Quest TALK_TO_CHRONOS_3;
     //呱呱支线
     public static Quest RIBBITS_QUEST;
+    public static Quest GIVE_AMETHYST_BLOCK_TO_RIBBITS;
 
     public static void init() {
 
@@ -145,7 +148,7 @@ public class TCRQuests {
 
         TAME_DRAGON = TCRQuestManager.create("tame_dragon")
                 .withIcon(SIDE_QUEST_1)
-                .descParam(TCREntities.FERRY_GIRL.get().getDescription(), ModItems.BOOK_OF_DRAGONS.get().getDescription());
+                .descParam(TCREntities.FERRY_GIRL.get().getDescription(), ModItems.BOOK_OF_DRAGONS.get().getDescription(), Component.translatable("item.domesticationinnovation.collar_tag"), Component.translatable("block.domesticationinnovation.pet_bed_white"));
 
         TAME_DRAGON_BACK_TO_FERRY_GIRL = TCRQuestManager.create("tame_dragon_back_to_ferry_girl")
                 .shortDescParam(TCREntities.FERRY_GIRL.get().getDescription())
@@ -163,7 +166,7 @@ public class TCRQuests {
 
         BONE_CHIMERA_QUEST = TCRQuestManager.create("bone_chimera_quest")
                 .withIcon(SIDE_QUEST_1)
-                .descParam(TCRItems.LAND_RESONANCE_STONE.get().getDescription())
+                .descParam(TCRItems.LAND_RESONANCE_STONE.get().getDescription(), TCRItems.MYSTERIOUS_WEAPONS.get().getDescription())
                 .shortDescParam(Component.translatable("structure.dodosmobs.jungle_prison"));
 
         TALK_TO_ORNN_1 = TCRQuestManager.create("talk_to_ornn_1")
@@ -196,6 +199,16 @@ public class TCRQuests {
                 .shortDescParam(TCREntities.CHRONOS_SOL.get().getDescription())
                 .descParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription(), TCREntities.CHRONOS_SOL.get().getDescription())
                 .withTrackingPos(new BlockPos(WorldUtil.CHRONOS_SOL_BLOCK_POS.above(4)), TCRDimensions.SANCTUM_LEVEL_KEY);
+
+        RIBBITS_QUEST = TCRQuestManager.create("ribbits_quest")
+                .withIcon(SIDE_QUEST_1)
+                .shortDescParam(Component.translatable("structure.ribbits.ribbit_village"))
+                .descParam(TCRItems.OCEAN_RESONANCE_STONE.get().getDescription(), Component.translatable(TCRSkills.WATER_AVOID.getTranslationKey()), artifacts.registry.ModItems.CHARM_OF_SINKING.get().getDescription());
+        GIVE_AMETHYST_BLOCK_TO_RIBBITS = TCRQuestManager.create("give_amethyst_block_to_ribbits")
+                .withIcon(SIDE_QUEST_1)
+                .shortDescParam(Items.AMETHYST_BLOCK.getDescription(), EntityTypeModule.RIBBIT.get().getDescription())
+                .descParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription(), EntityTypeModule.RIBBIT.get().getDescription(), Items.AMETHYST_BLOCK.getDescription(),
+                        Component.translatable(TCRSkills.WATER_AVOID.getTranslationKey()), artifacts.registry.ModItems.CHARM_OF_SINKING.get().getDescription());
 
     }
 }
