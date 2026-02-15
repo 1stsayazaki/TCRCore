@@ -33,5 +33,6 @@ public class TCRItemTabs {
                 output.accept(TCRItems.LAND_RESONANCE_STONE.get());
                 output.accept(TCRItems.OCEAN_RESONANCE_STONE.get());
                 output.accept(TCRItems.CURSED_RESONANCE_STONE.get());
+                output.accept(TCRItems.MAGIC_BOTTLE.get());
             }).build());
 }

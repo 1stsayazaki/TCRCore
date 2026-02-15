@@ -41,6 +41,7 @@
     "ItemMixin",
     "ItemStackMixin",
     "KnightSwordItemMixin",
+    "MagicManagerMixin",
     "MagnetUpgradeWrapperMixin",
     "MazeRoseMixin",
     "MenuHooksMixin",

@@ -123,8 +123,12 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addSkill("fire_avoid", "避火咒", "免疫火焰伤害！");
         this.addSkill("perfect_dodge", "闪避特效", "完美闪避时将有帅气的动作！");
 
+        this.add(TCRItems.MAGIC_BOTTLE.get(), "魔力之瓶");
+        this.addItemUsageInfo(TCRItems.MAGIC_BOTTLE.get(), "使用后可恢复一定比例的魔力");
         this.add(TCRItems.MYSTERIOUS_WEAPONS.get(), "百兵图");
         this.addItemUsageInfo(TCRItems.MYSTERIOUS_WEAPONS.get(), "上面似乎记载了世间百般兵器，拿给了解的人看看吧。");
+        this.add(TCRItems.NECROMANCY_SCROLL.get(), "死灵法卷");
+        this.addItemUsageInfo(TCRItems.NECROMANCY_SCROLL.get(), "上面似乎记载了魔法的秘密，拿给了解的人看看吧。");
         this.add(TCRItems.DRAGON_FLUTE.get(), "龙之笛");
         this.addItemUsageInfo(TCRItems.DRAGON_FLUTE.get(), "右键可收服龙，再次右键可释放龙。");
         this.add(TCRItems.RESONANCE_STONE.get(), "共鸣石");

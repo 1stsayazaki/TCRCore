@@ -71,7 +71,7 @@ public class WorldUtil {
     private static final Pattern LOCATE_PATTERN = Pattern.compile(".*?\\[\\s*(-?\\d+)\\s*,\\s*~\\s*,\\s*(-?\\d+)\\s*\\].*");
 
     public static boolean inMainLand(Entity entity) {
-        return entity.level().dimension() == TCRDimensions.SANCTUM_LEVEL_KEY && entity.position().subtract(CENTER_POS).horizontalDistance() < 250;
+        return entity.level().dimension() == TCRDimensions.SANCTUM_LEVEL_KEY;
     }
 
     public static boolean inMainLandRange(Entity entity) {

@@ -73,8 +73,12 @@ public class TCRENLangGenerator extends TCRLangProvider {
         this.addSkill("fire_avoid", "Fire Avoidance Charm", "Immunity to fire damage!");
         this.addSkill("perfect_dodge", "Dodge Effect", "Play a cool animation when perfect dodge!");
 
+        this.add(TCRItems.MAGIC_BOTTLE.get(), "Magic Bottle");
+        this.addItemUsageInfo(TCRItems.MAGIC_BOTTLE.get(), "Restores a certain percentage of mana when used");
         this.add(TCRItems.MYSTERIOUS_WEAPONS.get(), "Mysterious Weapons Scroll");
         this.addItemUsageInfo(TCRItems.MYSTERIOUS_WEAPONS.get(), "It seems to record all manner of weapons from around the world. You should show it to someone who knows about such things.");
+        this.add(TCRItems.NECROMANCY_SCROLL.get(), "Necromancy Scroll");
+        this.addItemUsageInfo(TCRItems.NECROMANCY_SCROLL.get(), "It seems to hold the secrets of magic within. Show it to someone who understands it.");
         this.add(TCRItems.DRAGON_FLUTE.get(), "Dragon Flute");
         this.addItemUsageInfo(TCRItems.DRAGON_FLUTE.get(), "Right-click to capture a dragon; right-click again to release it.");
         this.add(TCRItems.RESONANCE_STONE.get(), "Resonance Stone");

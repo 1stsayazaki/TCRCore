@@ -202,11 +202,10 @@ dependencies {
 
     implementation "maven.modrinth:preloading-tricks:3.2.2"
     implementation ("libs:tcrmodfilter:1.0.4")
+    implementation fg.deobf("libs:ef_spell_hud:1.0.1")
     implementation fg.deobf("libs:WeaponsOfMiracles:2.0.11:")
 //    implementation ("curse.maven:preloading-tricks-1372086:7210447")
 //    implementation fg.deobf("curse.maven:accelerated-rendering-1314021:7196153")
-
-    implementation fg.deobf("curse.maven:shelmarows-hud-1346457:7201614")
 
     implementation fg.deobf("curse.maven:fancymenu-367706:6918987")
     implementation fg.deobf("curse.maven:drippy-loading-screen-511770:6412211")
@@ -233,10 +232,17 @@ dependencies {
 
     implementation fg.deobf("libs:EpicFightNightfall:3.0")
     implementation fg.deobf("curse.maven:nightfall-invade-1362602:7366440")
-    implementation fg.deobf("curse.maven:combat-evolution-1377795:7373729")
+//    implementation fg.deobf("curse.maven:combat-evolution-1377795:7373729")
+    implementation fg.deobf("libs:CombatEvolution:1.1.19")
     implementation fg.deobf("libs:tcr_bosses:1.0.0")
     implementation fg.deobf("libs:tcrmeshes:1.0.0")
     implementation fg.deobf("libs:mimic:1.0.0")
+
+    //铁魔法
+    implementation fg.deobf("curse.maven:playeranimator-658587:4587214")
+    implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:7605614")
+    implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-scroll-description-1454137:7576978")
+    implementation fg.deobf("curse.maven:epic-fight-skillbook-description-1454141:7629226")
 
 //    implementation fg.deobf("curse.maven:shoulder-surfing-reloaded-243190:6993788")
     

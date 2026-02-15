@@ -269,10 +269,17 @@ public class LivingEntityEventListeners {
             }
 
             if (livingEntity instanceof OceanGolem) {
-                //捡起来之前都会掉
                 if (!PlayerDataManager.abyssEyeGotten.get(player)) {
                     ItemUtil.addItemEntity(player, ModItems.ABYSS_EYE.get(), 1, ChatFormatting.BLUE.getColor().intValue());
                     ItemUtil.addItemEntity(player, AquamiraeItems.SHIP_GRAVEYARD_ECHO.get(), 1, ChatFormatting.BLUE.getColor().intValue());
+                    player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
+                }
+            }
+
+            if (livingEntity instanceof CaptainCornelia) {
+                if (!PlayerDataManager.cursedEyeGotten.get(player)) {
+                    ItemUtil.addItemEntity(player, ModItems.CURSED_EYE.get(), 1, ChatFormatting.DARK_GREEN.getColor().intValue());
+                    ItemUtil.addItemEntity(player, TCRItems.NECROMANCY_SCROLL.get(), 1, ChatFormatting.DARK_GREEN.getColor().intValue());
                     player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
                 }
             }
