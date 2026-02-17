@@ -3,6 +3,7 @@ package com.p1nero.tcrcore.dialog.custom.handler.no_entity;
 import com.p1nero.dialog_lib.client.screen.builder.StreamDialogueScreenBuilder;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.datagen.lang.TCRLangProvider;
+import com.p1nero.tcrcore.dialog.CustomDialogHandler;
 import com.p1nero.tcrcore.entity.TCREntities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -27,7 +28,7 @@ public class StartScreenHandler {
 
         screenBuilder.start(builder.ans(0, TCREntities.AINE.get().getDescription(), TCREntities.AINE.get().getDescription()))
                         .addOption(builder.opt(0), builder.ans(1, TCREntities.AINE.get().getDescription()))
-                                .addFinalOption(builder.opt(1));
+                                .addFinalOption(builder.opt(1), CustomDialogHandler.ON_START_SCREEN);
 
         Minecraft.getInstance().setScreen(screenBuilder.build());
     }

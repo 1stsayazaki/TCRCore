@@ -12,6 +12,7 @@ import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.capability.PlayerDataManager;
 import com.p1nero.tcrcore.capability.TCRQuestManager;
 import com.p1nero.tcrcore.capability.TCRQuests;
+import com.p1nero.tcrcore.datagen.TCRAdvancementData;
 import com.p1nero.tcrcore.entity.TCREntities;
 import com.p1nero.tcrcore.item.TCRItems;
 import com.p1nero.tcrcore.utils.EntityUtil;
@@ -227,6 +228,7 @@ public class AineIrisEntity extends PathfinderMob implements IEntityNpc, GeoEnti
         if(code == 5) {
             TCRQuests.TALK_TO_AINE_MAGIC.finish(serverPlayer);
             TCRQuests.TRY_TO_LEARN_MAGIC.start(serverPlayer);
+            TCRAdvancementData.finishAdvancement("unlock_magic_and_boss", serverPlayer);
         }
 
         if(code == 6) {

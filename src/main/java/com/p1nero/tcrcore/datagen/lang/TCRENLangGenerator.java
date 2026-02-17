@@ -47,7 +47,6 @@ public class TCRENLangGenerator extends TCRLangProvider {
 
         this.add("item.domesticationinnovation.collar_tag.tcr_info", "It allows for special enchantments to be applied to pets.");
         this.addTCRItemInfo(net.blay09.mods.waystones.item.ModItems.warpStone, "Click the §6[Scroll]§r button in the inventory to teleport to activated waystones!");
-        this.addTCRItemInfo("§cWarning! This item may cause important items to be sucked into the backpack and become invalid!", net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.ADVANCED_MAGNET_UPGRADE.get(), net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.MAGNET_UPGRADE.get(), net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.PICKUP_UPGRADE.get(), net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.ADVANCED_PICKUP_UPGRADE.get());
         this.addTCRItemInfo(ItemRegistry.BOTTLE_OF_BLOOD.get(), "Brewed using §c[Crystallized Blood Marrow]§r, a drop from §d[Nehemoth]§r");
         this.addTCRItemInfo(EFNItem.DEEPDARK_HEART.get(), "Obtained by defeating the §2[Warden]§r or §2[Captain Cornelia]§r");
         this.addTCRItemInfo(ModItems.CORAL_CHUNK.get(), "Obtained by defeating the §a[Coral Colossus]§r in the §dcloudland of The Leviathan§r");
@@ -81,6 +80,7 @@ public class TCRENLangGenerator extends TCRLangProvider {
         this.add(TCRItems.LAND_RESONANCE_STONE.get(), "Land Resonance Stone");
         this.add(TCRItems.OCEAN_RESONANCE_STONE.get(), "Ocean Resonance Stone");
         this.add(TCRItems.CURSED_RESONANCE_STONE.get(), "Cursed Resonance Stone");
+        this.add(TCRItems.CORE_RESONANCE_STONE.get(), "Core Resonance Stone");
         this.addInfo("resonance_stone_usage", "Can resonate with the location of the Angel's seal");
         this.add(TCRItems.CORE_FLINT.get(), "Core Flint");
         this.addItemUsageInfo(TCRItems.CORE_FLINT.get(), "Use on an Obsidian Frame to open a Nether Portal.");
@@ -100,6 +100,7 @@ public class TCRENLangGenerator extends TCRLangProvider {
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "It bears an ancient oracle hinting at the locations of scattered embers. Show it to the The Sanctuary Keeper in the The Sanctuary; it might aid your adventure!");
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "§cIn multiplayer mode, do not occupy other players'! Everyone must submit their own!", 2);
 
+        this.addInfo("open_backpack_tutorial", "Press [%s] to view Backpack");
         this.addInfo("unlock_new_ftb_page_title", "§6New Chapter Unlocked!");
         this.addInfo("unlock_new_ftb_page_subtitle", "§aPress [%s§a] to view");
         this.addInfo("resonance_stone_working", "[%s] Resonating... Please wait patiently...");

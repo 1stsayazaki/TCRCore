@@ -4,6 +4,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.p3pp3rf1y.sophisticatedcore.upgrades.IPickupResponseUpgrade;
 import net.p3pp3rf1y.sophisticatedcore.upgrades.UpgradeHandler;
 import net.p3pp3rf1y.sophisticatedcore.util.InventoryHelper;
@@ -15,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * 尝试修复拾取升级影响进度的bug
+ * 尝试修复拾取升级影响进度的bug，本体不加背包但是防止bug还是加一下
  */
 @Mixin(InventoryHelper.class)
 public abstract class BackpackInventoryHelperMixin {
@@ -32,7 +33,7 @@ public abstract class BackpackInventoryHelperMixin {
             int countBeforePickup = remainingStack.getCount();
             remainingStack = pickupUpgrade.pickup(world, remainingStack, simulate);
             if (!simulate && player != null && remainingStack.getCount() != countBeforePickup) {
-                net.minecraftforge.event.ForgeEventFactory.firePlayerItemPickupEvent(player, temp, copy);
+                ForgeEventFactory.firePlayerItemPickupEvent(player, temp, copy);
                 playPickupSound(world, player);
             }
 

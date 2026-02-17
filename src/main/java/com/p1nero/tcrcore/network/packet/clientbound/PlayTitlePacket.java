@@ -3,10 +3,12 @@ package com.p1nero.tcrcore.network.packet.clientbound;
 import com.p1nero.dialog_lib.network.packet.BasePacket;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.client.TCRKeyMappings;
+import com.wintercogs.beyonddimensions.ShortCutKey.DimensionsShortKeys;
 import dev.ftb.mods.ftbquests.client.FTBQuestsClient;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import yesman.epicfight.client.input.EpicFightKeyMappings;
 
@@ -17,6 +19,7 @@ public record PlayTitlePacket(int id) implements BasePacket {
     public static final int LOCK_TUTORIAL = 3;
     public static final int RIPTIDE_TUTORIAL = 4;
     public static final int UNLOCK_NEW_CHAPTER = 5;
+    public static final int OPEN_BACKPACK_TUTORIAL = 6;
 
     @Override
     public void encode(FriendlyByteBuf buf) {
@@ -49,6 +52,10 @@ public record PlayTitlePacket(int id) implements BasePacket {
                 case UNLOCK_NEW_CHAPTER -> {
                     Minecraft.getInstance().gui.setTitle(TCRCoreMod.getInfo("unlock_new_ftb_page_title"));
                     Minecraft.getInstance().gui.setSubtitle(TCRCoreMod.getInfo("unlock_new_ftb_page_subtitle", FTBQuestsClient.KEY_QUESTS.getTranslatedKeyMessage().copy().withStyle(ChatFormatting.GOLD)));
+                }
+                case OPEN_BACKPACK_TUTORIAL -> {
+                    Minecraft.getInstance().gui.setTitle(Component.literal(""));
+                    Minecraft.getInstance().gui.setSubtitle(TCRCoreMod.getInfo("open_backpack_tutorial", DimensionsShortKeys.OPEN_GUI_KEY.getTranslatedKeyMessage().copy().withStyle(ChatFormatting.GOLD)));
                 }
             }
         }

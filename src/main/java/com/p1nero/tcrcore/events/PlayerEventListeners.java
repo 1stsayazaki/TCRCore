@@ -1,5 +1,6 @@
 package com.p1nero.tcrcore.events;
 
+import com.aetherteam.aether.data.resources.registries.AetherDimensions;
 import com.hm.efn.gameasset.EFNSkills;
 import com.obscuria.aquamirae.registry.AquamiraeItems;
 import com.p1nero.cataclysm_dimension.worldgen.CataclysmDimensions;
@@ -19,6 +20,8 @@ import com.p1nero.tcrcore.save_data.TCRDimSaveData;
 import com.p1nero.tcrcore.utils.ItemUtil;
 import com.p1nero.tcrcore.utils.WorldUtil;
 import com.p1nero.tcrcore.worldgen.TCRDimensions;
+import com.wintercogs.beyonddimensions.Api.DataBase.DimensionsNet;
+import com.wintercogs.beyonddimensions.Api.DataBase.Stack.ItemStackType;
 import com.yesman.epicskills.registry.entry.EpicSkillsItems;
 import com.yesman.epicskills.registry.entry.EpicSkillsSkillTrees;
 import com.yesman.epicskills.skilltree.SkillTree;
@@ -29,6 +32,7 @@ import net.genzyuro.uniqueaccessories.registry.UAItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -36,6 +40,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -48,6 +53,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -64,7 +70,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.p1nero.ss.SwordSoaringMod;
 import net.p1nero.ss.gameassets.skills.SwordControllerSkills;
-import net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems;
 import org.merlin204.wraithon.util.PositionTeleporter;
 import org.merlin204.wraithon.worldgen.WraithonDimensions;
 import top.theillusivec4.curios.api.event.CurioEquipEvent;
@@ -136,7 +141,8 @@ public class PlayerEventListeners {
                 addSkill(serverPlayer, EFNSkills.EFN_PARRY, SkillSlots.GUARD);
                 addSkill(serverPlayer, DPRSkills.STAMINA1, SkillSlots.PASSIVE1);
 
-                ItemUtil.addItem(serverPlayer, ModItems.BACKPACK.get(), 1);
+                addBeyondDimensionNet(serverPlayer);
+
                 ItemUtil.addItem(serverPlayer, Items.LANTERN, 1);
                 ItemUtil.addItem(serverPlayer, Items.BREAD, 32);
                 ItemUtil.addItem(serverPlayer, EpicSkillsItems.ABILIITY_STONE.get(), 1);
@@ -156,6 +162,15 @@ public class PlayerEventListeners {
 
             PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new CSTipPacket(), serverPlayer);
         }
+    }
+
+    public static void addBeyondDimensionNet(ServerPlayer player) {
+        DimensionsNet net = DimensionsNet.getNetFromPlayer(player);
+        if (net != null) {
+            return;
+        }
+        DimensionsNet.createNewNetForPlayer(player, Long.MAX_VALUE, Integer.MAX_VALUE);
+        player.serverLevel().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 0.8F, 1.0F);
     }
 
     public static void addSkill(ServerPlayer player, Skill skill, SkillSlot slot) {
@@ -359,7 +374,7 @@ public class PlayerEventListeners {
                     PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new OpenCustomDialogPacket(OpenCustomDialogPacket.FIRST_ENTER_CLOUDLAND), serverPlayer);
                 }
             }
-            //处理使用共鸣石
+            //处理使用共鸣石任务
             if(event.getTo().equals(Level.OVERWORLD)) {
                 if(TCRQuestManager.hasQuest(serverPlayer, TCRQuests.GO_TO_OVERWORLD_OCEAN)) {
                     TCRQuests.GO_TO_OVERWORLD_OCEAN.finish(serverPlayer, true);
@@ -369,6 +384,19 @@ public class PlayerEventListeners {
                     TCRQuests.GO_TO_OVERWORLD_CURSED.finish(serverPlayer, true);
                     TCRQuests.USE_CURSED_RESONANCE_STONE.start(serverPlayer);
                 }
+                if(TCRQuestManager.hasQuest(serverPlayer, TCRQuests.GO_TO_OVERWORLD_CORE)) {
+                    TCRQuests.GO_TO_OVERWORLD_CORE.finish(serverPlayer, true);
+                    TCRQuests.USE_CORE_RESONANCE_STONE.start(serverPlayer);
+                }
+            }
+            if(event.getTo().equals(Level.NETHER)) {
+
+            }
+            if(event.getTo().equals(Level.END)) {
+
+            }
+            if(event.getTo().equals(AetherDimensions.AETHER_LEVEL)) {
+
             }
             updateHealth(serverPlayer, event.getFrom());
             updateHealth(serverPlayer, event.getTo());
@@ -435,6 +463,10 @@ public class PlayerEventListeners {
                 player.displayClientMessage(TCRCoreMod.getInfo("can_not_do_this_too_early"), true);
                 event.setCanceled(true);
             }
+            if(!TCRQuests.USE_CORE_RESONANCE_STONE.isFinished(player) && event.getItem().getItem().is(com.github.L_Ender.cataclysm.init.ModItems.MONSTROUS_EYE.get())) {
+                player.displayClientMessage(TCRCoreMod.getInfo("can_not_do_this_too_early"), true);
+                event.setCanceled(true);
+            }
         }
 
     }
@@ -481,6 +513,19 @@ public class PlayerEventListeners {
                 }
                 TCRQuests.TALK_TO_AINE_MAGIC.start(player);
                 TCRQuests.TALK_TO_CHRONOS_5.start(player);
+            }
+            if(TCRQuestManager.hasQuest(player, TCRQuests.GET_MONST_EYE) && itemStack.is(com.github.L_Ender.cataclysm.init.ModItems.MONSTROUS_EYE.get())) {
+                giveOracleEffect(player, com.github.L_Ender.cataclysm.init.ModItems.MONSTROUS_EYE.get());
+                PlayerDataManager.monstEyeGotten.put(player, true);
+                TCRQuests.GET_MONST_EYE.finish(player, true);
+                if(!PlayerDataManager.monstEyeActivated.get(player)) {
+                    TCRQuests.PUT_MONST_EYE_ON_ALTAR.start(player);
+                }
+                if(!PlayerDataManager.monstEyeBlessed.get(player)) {
+                    TCRQuests.BLESS_ON_THE_GODNESS_STATUE.start(player);
+                }
+                TCRQuests.TALK_TO_AINE_MAGIC.start(player);
+                TCRQuests.TALK_TO_CHRONOS_7.start(player);
             }
 
             if (itemStack.is(AquamiraeItems.SHELL_HORN.get()) && !PlayerDataManager.abyssEyeGotten.get(player)) {

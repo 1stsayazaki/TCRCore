@@ -85,6 +85,13 @@ public class TCRQuests {
 
     //主线·炉心傀儡
     public static Quest TALK_TO_CHRONOS_6;
+    public static Quest GO_TO_OVERWORLD_CORE;
+    public static Quest USE_CORE_RESONANCE_STONE;
+    public static Quest GET_MONST_EYE;
+    public static Quest TALK_TO_CHRONOS_7;
+    //间章，和安闲聊
+    public static Quest TALK_TO_AINE_1;
+
 
     public static void init() {
 
@@ -100,8 +107,8 @@ public class TCRQuests {
 
         PUT_ABYSS_EYE_ON_ALTAR = TCRQuestManager.create("put_abyss_eye_on_altar")
                 .withIcon(SIDE_QUEST_1)
-                .shortDescParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription())
-                .descParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription())
+                .shortDescParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription().copy().withStyle(ChatFormatting.BLUE))
+                .descParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription().copy().withStyle(ChatFormatting.BLUE))
                 .withTrackingPos(new BlockPos(WorldUtil.ABYSS_EYE_ALTAR_POS.above()), TCRDimensions.SANCTUM_LEVEL_KEY);
 
         PUT_CURSED_EYE_ON_ALTAR = TCRQuestManager.create("put_cursed_eye_on_altar")
@@ -207,18 +214,18 @@ public class TCRQuests {
                 .withTrackingPos(new BlockPos(WorldUtil.CHRONOS_SOL_BLOCK_POS.above(4)), TCRDimensions.SANCTUM_LEVEL_KEY);
 
         GO_TO_OVERWORLD_OCEAN = TCRQuestManager.create("go_to_overworld_ocean")
-                .descParam(TCRItems.RESONANCE_STONE.get().getDescription());
+                .descParam(TCRItems.RESONANCE_STONE.get().getDescription(), com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription().copy().withStyle(ChatFormatting.BLUE));
 
         USE_OCEAN_RESONANCE_STONE = TCRQuestManager.create("use_ocean_resonance_stone")
                 .shortDescParam(TCRItems.OCEAN_RESONANCE_STONE.get().getDescription())
-                .descParam(TCRItems.OCEAN_RESONANCE_STONE.get().getDescription());
+                .descParam(TCRItems.OCEAN_RESONANCE_STONE.get().getDescription(), com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription().copy().withStyle(ChatFormatting.BLUE));
 
         GET_OCEAN_EYE = TCRQuestManager.create("get_ocean_eye")
-                .shortDescParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription(), TCRItems.OCEAN_RESONANCE_STONE.get().getDescription(), com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription(), Items.SPAWNER.getDescription());
+                .shortDescParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription().copy().withStyle(ChatFormatting.BLUE), TCRItems.OCEAN_RESONANCE_STONE.get().getDescription(), com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription().copy().withStyle(ChatFormatting.BLUE), Items.SPAWNER.getDescription());
 
         TALK_TO_CHRONOS_3 = TCRQuestManager.create("talk_to_chronos_3")
                 .shortDescParam(TCREntities.CHRONOS_SOL.get().getDescription())
-                .descParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription(), TCREntities.CHRONOS_SOL.get().getDescription(), AquamiraeItems.SHIP_GRAVEYARD_ECHO.get().getDescription())
+                .descParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription().copy().withStyle(ChatFormatting.BLUE), TCREntities.CHRONOS_SOL.get().getDescription(), AquamiraeItems.SHIP_GRAVEYARD_ECHO.get().getDescription())
                 .withTrackingPos(new BlockPos(WorldUtil.CHRONOS_SOL_BLOCK_POS.above(4)), TCRDimensions.SANCTUM_LEVEL_KEY);
 
         RIBBITS_QUEST = TCRQuestManager.create("ribbits_quest")
@@ -228,7 +235,7 @@ public class TCRQuests {
         GIVE_AMETHYST_BLOCK_TO_RIBBITS = TCRQuestManager.create("give_amethyst_block_to_ribbits")
                 .withIcon(SIDE_QUEST_1)
                 .shortDescParam(Items.AMETHYST_BLOCK.getDescription(), EntityTypeModule.RIBBIT.get().getDescription())
-                .descParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription(), EntityTypeModule.RIBBIT.get().getDescription(), Items.AMETHYST_BLOCK.getDescription(),
+                .descParam(com.github.L_Ender.cataclysm.init.ModItems.ABYSS_EYE.get().getDescription().copy().withStyle(ChatFormatting.BLUE), EntityTypeModule.RIBBIT.get().getDescription(), Items.AMETHYST_BLOCK.getDescription(),
                         Component.translatable(TCRSkills.WATER_AVOID.getTranslationKey()), artifacts.registry.ModItems.CHARM_OF_SINKING.get().getDescription());
 
         TALK_TO_AINE_ECHO = TCRQuestManager.create("talk_to_aine_echo")
@@ -278,6 +285,27 @@ public class TCRQuests {
                 .shortDescParam(TCREntities.CHRONOS_SOL.get().getDescription())
                 .descParam(TCRItems.RESONANCE_STONE.get().getDescription(), TCREntities.CHRONOS_SOL.get().getDescription())
                 .withTrackingPos(new BlockPos(WorldUtil.CHRONOS_SOL_BLOCK_POS.above(4)), TCRDimensions.SANCTUM_LEVEL_KEY);
+
+        GO_TO_OVERWORLD_CORE = TCRQuestManager.create("go_to_overworld_core")
+                .descParam(TCRItems.RESONANCE_STONE.get().getDescription(), com.github.L_Ender.cataclysm.init.ModItems.MONSTROUS_EYE.get().getDescription().copy().withStyle(ChatFormatting.DARK_RED));
+
+        USE_CORE_RESONANCE_STONE = TCRQuestManager.create("use_core_resonance_stone")
+                .shortDescParam(TCRItems.CORE_RESONANCE_STONE.get().getDescription().copy().withStyle(ChatFormatting.DARK_RED))
+                .descParam(TCRItems.CORE_RESONANCE_STONE.get().getDescription().copy().withStyle(ChatFormatting.DARK_RED), com.github.L_Ender.cataclysm.init.ModItems.MONSTROUS_EYE.get().getDescription().copy().withStyle(ChatFormatting.DARK_RED));
+
+        GET_MONST_EYE = TCRQuestManager.create("get_monst_eye")
+                .shortDescParam(com.github.L_Ender.cataclysm.init.ModItems.MONSTROUS_EYE.get().getDescription().copy().withStyle(ChatFormatting.DARK_RED))
+                .descParam(TCRItems.CORE_RESONANCE_STONE.get().getDescription().copy().withStyle(ChatFormatting.DARK_RED), com.github.L_Ender.cataclysm.init.ModItems.MONSTROUS_EYE.get().getDescription().copy().withStyle(ChatFormatting.DARK_RED), com.github.L_Ender.cataclysm.init.ModItems.MONSTROUS_EYE.get().getDescription().copy().withStyle(ChatFormatting.DARK_RED));
+
+        TALK_TO_CHRONOS_7 = TCRQuestManager.create("talk_to_chronos_7")
+                .shortDescParam(TCREntities.CHRONOS_SOL.get().getDescription())
+                .descParam(com.github.L_Ender.cataclysm.init.ModItems.MONSTROUS_EYE.get().getDescription(), TCREntities.CHRONOS_SOL.get().getDescription())
+                .withTrackingPos(new BlockPos(WorldUtil.CHRONOS_SOL_BLOCK_POS.above(4)), TCRDimensions.SANCTUM_LEVEL_KEY);
+
+        TALK_TO_AINE_1 = TCRQuestManager.create("talk_to_aine_1")
+                .shortDescParam(TCREntities.AINE.get().getDescription())
+                .descParam(TCREntities.AINE.get().getDescription())
+                .withTrackingPos(new BlockPos(WorldUtil.AINE_POS.above(2)), TCRDimensions.SANCTUM_LEVEL_KEY);
 
     }
 }

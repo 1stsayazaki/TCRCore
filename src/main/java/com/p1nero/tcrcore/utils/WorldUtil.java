@@ -65,6 +65,7 @@ public class WorldUtil {
     public static final String SKY_GOLEM = "lost_aether_content:platinum_dungeon";
     public static final String OCEAN_GOLEM = "ba_bt:ocean_tower";
     public static final String LAND_GOLEM = "ba_bt:land_tower";
+    public static final String CORE_GOLEM = "ba_bt:core_tower";
     public static Vec2i storm, flame, abyss, cursed, desert;
 
     public static List<MapColor> surfaceMaterials = Arrays.asList(MapColor.WATER, MapColor.ICE);

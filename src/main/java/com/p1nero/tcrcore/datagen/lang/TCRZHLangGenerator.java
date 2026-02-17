@@ -69,8 +69,8 @@ public class TCRZHLangGenerator extends TCRLangProvider {
 
         //主线·深渊之眼
         this.addQuest(TCRQuests.TALK_TO_CHRONOS_2, "海洋之章", "和%s对话", "经过漫长的等待，%s已完成充能。快回去找%s吧！她在圣殿里等你。");
-        this.addQuest(TCRQuests.GO_TO_OVERWORLD_OCEAN, "海洋之章", "前往Overworld", "[%s]已完成充能，该前往Overworld使用它了！它将为我们指引下一个眼睛的位置！");
-        this.addQuest(TCRQuests.USE_OCEAN_RESONANCE_STONE, "海洋之章", "使用[%s]", "你已经抵达了主世界，快使用[%s]吧！它将为我们指引下一个眼睛的位置！到底有什么样的冒险在等着我们呢？");
+        this.addQuest(TCRQuests.GO_TO_OVERWORLD_OCEAN, "海洋之章", "前往Overworld", "[%s]已完成充能，该前往Overworld使用它了！它将为我们指引[%s]的位置！");
+        this.addQuest(TCRQuests.USE_OCEAN_RESONANCE_STONE, "海洋之章", "使用[%s]", "你已经抵达了主世界，快使用[%s]吧！它将为我们指引[%s]的位置！到底有什么样的冒险在等着我们呢？");
         this.addQuest(TCRQuests.GET_OCEAN_EYE, "海洋之章", "寻回[%s]", "[%s]为我们标记了[%s]所散落的位置，快出发去寻回[%s]吧！\n\n§a[提示]:[%s§a]可能藏匿于方块之中！ \n\n§4[注意]：若获取后无法完成任务，请尝试关闭可能自动拾取物品的插件，并扔出去后重新拾取！");
         this.addQuest(TCRQuests.TALK_TO_CHRONOS_3, "海洋之章", "和%s对话", "[%s]已经寻回，快回主城找%s汇报吧！她将告诉我们下一步该做什么。\n\n本次我们还取回了[%s]，这里面究竟蕴藏了什么秘密？顺便问问吧！");
 
@@ -92,7 +92,13 @@ public class TCRZHLangGenerator extends TCRLangProvider {
 
         //主线·巨兽之眼
         this.addQuest(TCRQuests.TALK_TO_CHRONOS_6, "巨兽之章", "和%s对话", "经过漫长的等待，%s已完成充能。快回去找%s吧！她在圣殿里等你。");
+        this.addQuest(TCRQuests.GO_TO_OVERWORLD_CORE, "巨兽之章", "前往Overworld", "[%s]已完成充能，该前往Overworld使用它了！它将为我们指引[%s]的位置！");
+        this.addQuest(TCRQuests.USE_CORE_RESONANCE_STONE, "巨兽之章", "使用[%s]", "你已经抵达了主世界，快使用[%s]吧！它将为我们指引[%s]的位置！到底有什么样的冒险在等着我们呢？");
+        this.addQuest(TCRQuests.GET_MONST_EYE, "巨兽之章", "寻回[%s]", "[%s]为我们标记了[%s]所散落的位置，快出发去寻回[%s]吧！\n\n§a[提示]:§f[%s]或藏匿于地下高塔之中，你需要有破开黑曜石屏障的力量！");
+        this.addQuest(TCRQuests.TALK_TO_CHRONOS_7, "巨兽之章", "和%s对话", "[%s]已经寻回，快回主城找%s汇报吧！她将告诉我们下一步该做什么。");
 
+        this.addQuest(TCRQuests.TALK_TO_AINE_1, "间章", "和%s聊聊", "收集神之眼的旅途至今已归还一半祭坛了，和%s聊聊感想吧！");
+//        this.addQuest(TCRQuests., "", "", "");
 
         this.addEffect(TCREffects.INVULNERABLE, "无敌");
         this.addEffect(TCREffects.SOUL_INCINERATOR, "灵魂火");
@@ -107,7 +113,6 @@ public class TCRZHLangGenerator extends TCRLangProvider {
 
         this.add("item.domesticationinnovation.collar_tag.tcr_info", "可进行特殊附魔，并将附魔应用于宠物身上。");
         this.addTCRItemInfo(net.blay09.mods.waystones.item.ModItems.warpStone, "点击物品栏中的传送卷轴按钮以进行传送。");
-        this.addTCRItemInfo("§c警告！此物品可能导致重要道具被吸入背包而失效！", net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.ADVANCED_MAGNET_UPGRADE.get(), net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.MAGNET_UPGRADE.get(), net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.PICKUP_UPGRADE.get(), net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.ADVANCED_PICKUP_UPGRADE.get());
         this.addTCRItemInfo(ItemRegistry.BOTTLE_OF_BLOOD.get(), "使用§d[尼赫莫斯]§r掉落物§c[晶化血髓]§r酿造获取");
         this.addTCRItemInfo(EFNItem.DEEPDARK_HEART.get(), "击败§2[监守者]§r或§2[可妮莉亚船长]§r获取");
         this.addTCRItemInfo(ModItems.CORAL_CHUNK.get(), "于§d利维坦幻境§r击败§a[珊瑚巨像]§r获取");
@@ -141,6 +146,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.add(TCRItems.LAND_RESONANCE_STONE.get(), "大地共鸣石");
         this.add(TCRItems.OCEAN_RESONANCE_STONE.get(), "海洋共鸣石");
         this.add(TCRItems.CURSED_RESONANCE_STONE.get(), "诅咒共鸣石");
+        this.add(TCRItems.CORE_RESONANCE_STONE.get(), "炉心共鸣石");
         this.addInfo("resonance_stone_usage", "可与使徒封印的位置共鸣。");
         this.add(TCRItems.CORE_FLINT.get(), "炉心火石");
         this.addItemUsageInfo(TCRItems.CORE_FLINT.get(), "在黑曜石框架上使用，可打开地狱之门。");
@@ -160,6 +166,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "上面写着古老的神谕，暗示了火种散落的地方。回主城给守望者看看吧，说不定对冒险有帮助！");
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "§c多人模式请勿占据他人任务道具！每人都需各自提交！", 2);
 
+        this.addInfo("open_backpack_tutorial", "按下 [%s] 以打开随身空间");
         this.addInfo("unlock_new_ftb_page_title", "§6新图鉴解锁！");
         this.addInfo("unlock_new_ftb_page_subtitle", "§a按[%s§a]查看");
         this.addInfo("resonance_stone_working", "[%s]共鸣中...请耐心等待...");
@@ -369,6 +376,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 20, "这是...%s？！");
         this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 21, "既然如此，这份记忆便可以让共鸣石提前恢复魔力，吾这就将回响注入共鸣石之中，阁下务必把祂的火种收回！");
         this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 22, "请阁下将神之眼归位到祭坛上吧！没想到掌管冥界的使徒（Angel），终将自己踏入冥界...");
+        this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 23, "");
 
         this.addDialogOption(TCREntities.AINE.get(), -4, "§6法术淬灵");
         this.addDialogOption(TCREntities.AINE.get(), -3, "§6法术交易");

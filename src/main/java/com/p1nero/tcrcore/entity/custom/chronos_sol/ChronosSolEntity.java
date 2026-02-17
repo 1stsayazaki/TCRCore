@@ -211,6 +211,10 @@ public class ChronosSolEntity extends PathfinderMob implements IEntityNpc, GeoEn
                     .addOption(dBuilder.opt(7, ModItems.CURSED_EYE.get().getDescription()), dBuilder.ans(22))
                     .addFinalOption(-2, 6);
             return treeBuilder.build();
+        } else if(TCRQuests.TALK_TO_CHRONOS_6.equals(currentQuest)) {
+            //充能完毕，去开始领炉心共鸣石
+            root = new DialogNode(dBuilder.ans(16))
+                    .addLeaf(dBuilder.opt(-4, TCRItems.CORE_RESONANCE_STONE.get().getDescription()), 7);
         } else {
             //默认的情况
 
@@ -258,7 +262,7 @@ public class ChronosSolEntity extends PathfinderMob implements IEntityNpc, GeoEn
             tcrPlayer.startWaitingResonanceStoneCharge(player);
         }
 
-        //领海洋眼
+        //领海洋共鸣石
         if(code == 3) {
             TCRQuests.TALK_TO_CHRONOS_2.finish(player);
             ItemUtil.addItemEntity(player, TCRItems.OCEAN_RESONANCE_STONE.get(), 1, ChatFormatting.BLUE.getColor());
@@ -283,6 +287,13 @@ public class ChronosSolEntity extends PathfinderMob implements IEntityNpc, GeoEn
             TCRQuests.TALK_TO_CHRONOS_5.finish(player);
             TCRPlayer tcrPlayer = TCRCapabilityProvider.getTCRPlayer(player);
             tcrPlayer.startWaitingResonanceStoneCharge(player);
+        }
+
+        //领炉心共鸣石
+        if(code == 7) {
+            TCRQuests.TALK_TO_CHRONOS_6.finish(player);
+            ItemUtil.addItemEntity(player, TCRItems.CORE_RESONANCE_STONE.get(), 1, ChatFormatting.BLUE.getColor());
+            TCRQuests.GO_TO_OVERWORLD_CORE.start(player);
         }
 
         this.setConversingPlayer(null);

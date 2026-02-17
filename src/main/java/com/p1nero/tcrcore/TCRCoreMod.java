@@ -84,8 +84,6 @@ public class TCRCoreMod {
         PlayerEventListeners.illegalItems.add(artifacts.registry.ModItems.VAMPIRIC_GLOVE.get());
         PlayerEventListeners.illegalItems.add(UAItems.BURNING_SOUL.get());
         PlayerEventListeners.illegalItems.add(AquamiraeItems.DIVIDER.get());
-        PlayerEventListeners.illegalItems.add(net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.FEEDING_UPGRADE.get());
-        PlayerEventListeners.illegalItems.add(net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems.ADVANCED_FEEDING_UPGRADE.get());
         PlayerEventListeners.illegalItems.add(artifacts.registry.ModItems.SCARF_OF_INVISIBILITY.get());
 
         LivingEntityEventListeners.illegalEntityTypes.addAll(List.of(

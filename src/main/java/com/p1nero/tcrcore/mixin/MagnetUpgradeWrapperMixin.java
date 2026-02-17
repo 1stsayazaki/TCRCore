@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.p3pp3rf1y.sophisticatedcore.api.IStorageWrapper;
 import net.p3pp3rf1y.sophisticatedcore.upgrades.*;
 import net.p3pp3rf1y.sophisticatedcore.upgrades.magnet.MagnetUpgradeItem;
@@ -66,7 +67,7 @@ public abstract class MagnetUpgradeWrapperMixin extends UpgradeWrapperBase<Magne
         int cooldown = FULL_COOLDOWN_TICKS;
         for (ItemEntity itemEntity : itemEntities) {
             if(player != null) {
-                int hook = net.minecraftforge.event.ForgeEventFactory.onItemPickup(itemEntity, player);
+                int hook = ForgeEventFactory.onItemPickup(itemEntity, player);
                 if (hook < 0) continue;
             }
             if (!itemEntity.isAlive() || itemEntity.pickupDelay == ItemEntity.INFINITE_PICKUP_DELAY || !filterLogic.matchesFilter(itemEntity.getItem()) || canNotPickup(itemEntity, entity)) {
@@ -76,7 +77,7 @@ public abstract class MagnetUpgradeWrapperMixin extends UpgradeWrapperBase<Magne
             ItemStack itemStack = itemEntity.getItem().copy();
             if (tryToInsertItem(itemEntity)) {
                 if (player != null) {
-                    net.minecraftforge.event.ForgeEventFactory.firePlayerItemPickupEvent(player, itemEntity, itemStack);
+                    ForgeEventFactory.firePlayerItemPickupEvent(player, itemEntity, itemStack);
                     playItemPickupSound(world, player);
                 }
                 cooldown = COOLDOWN_TICKS;

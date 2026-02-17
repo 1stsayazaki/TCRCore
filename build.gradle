@@ -360,8 +360,10 @@ dependencies {
     implementation fg.deobf("curse.maven:library-ferret-forge-532727:4601234")
 
     //背包
-    implementation fg.deobf("curse.maven:sophisticated-core-618298:6266807")
-    implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:6246607")
+    compileOnly fg.deobf("curse.maven:sophisticated-core-618298:6266807")
+    compileOnly fg.deobf("curse.maven:sophisticated-backpacks-422301:6246607")
+
+    implementation fg.deobf("curse.maven:beyond-dimensions-1222890:7629726")
 
     implementation fg.deobf("curse.maven:trashslot-235577:6319121")
 
@@ -407,8 +409,6 @@ dependencies {
     implementation fg.deobf("curse.maven:blueprint-382216:6408581")
 
     implementation fg.deobf("curse.maven:lootr-361276:6330326")
-
-    implementation fg.deobf("curse.maven:small-ships-450659:5566900")
 
     //饰品
     implementation fg.deobf("curse.maven:artifacts-312353:6399828")
