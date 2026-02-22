@@ -1,6 +1,5 @@
 package com.p1nero.tcrcore.events;
 
-import com.aetherteam.aether.block.dungeon.DoorwayBlock;
 import com.brass_amber.ba_bt.entity.hostile.golem.*;
 import com.brass_amber.ba_bt.init.BTItems;
 import com.github.L_Ender.cataclysm.entity.AnimationMonster.BossMonsters.Ender_Guardian_Entity;
@@ -38,7 +37,6 @@ import com.p1nero.tcrcore.worldgen.TCRDimensions;
 import com.yesman.epicskills.registry.entry.EpicSkillsItems;
 import net.kenddie.fantasyarmor.item.FAItems;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.MutableComponent;
@@ -61,8 +59,6 @@ import net.minecraft.world.entity.monster.Guardian;
 import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
@@ -86,7 +82,6 @@ import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 @Mod.EventBusSubscriber(modid = TCRCoreMod.MOD_ID)
 public class LivingEntityEventListeners {
@@ -97,8 +92,8 @@ public class LivingEntityEventListeners {
     public static void onLivingAttack(LivingAttackEvent event) {
         Entity attacker = event.getSource().getEntity();
         //禁用原版攻击
-        if(attacker instanceof Player player && player.level().isClientSide) {
-            if(player.isLocalPlayer()) {
+        if (attacker instanceof Player player && player.level().isClientSide) {
+            if (player.isLocalPlayer()) {
                 EpicFightCapabilities.getUnparameterizedEntityPatch(player, PlayerPatch.class).ifPresent(playerPatch -> {
                     if (playerPatch.isVanillaMode()) {
                         event.setCanceled(true);
@@ -127,7 +122,7 @@ public class LivingEntityEventListeners {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
 
             //被打死重置状态
-            if(event.getSource().getEntity() instanceof Bone_Chimera_Entity boneChimeraEntity) {
+            if (event.getSource().getEntity() instanceof Bone_Chimera_Entity boneChimeraEntity) {
                 boneChimeraEntity.getPersistentData().putBoolean("fighting", false);
             }
 
@@ -192,56 +187,56 @@ public class LivingEntityEventListeners {
 
             //击败祭坛内的boss
             if (livingEntity instanceof Scylla_Entity) {
-                if(!PlayerDataManager.stormEyeKilled.get(player)) {
+                if (!PlayerDataManager.stormEyeKilled.get(player)) {
                     ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.stormEyeKilled.put(player, true);
                 }
             }
 
             if (livingEntity instanceof Ignis_Entity) {
-                if(!PlayerDataManager.flameEyeKilled.get(player)) {
+                if (!PlayerDataManager.flameEyeKilled.get(player)) {
                     ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.flameEyeKilled.put(player, true);
                 }
             }
 
             if (livingEntity instanceof The_Leviathan_Entity) {
-                if(!PlayerDataManager.abyssEyeKilled.get(player)) {
+                if (!PlayerDataManager.abyssEyeKilled.get(player)) {
                     ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.abyssEyeKilled.put(player, true);
                 }
             }
 
             if (livingEntity instanceof Maledictus_Entity) {
-                if(!PlayerDataManager.cursedEyeKilled.get(player)) {
+                if (!PlayerDataManager.cursedEyeKilled.get(player)) {
                     ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.cursedEyeKilled.put(player, true);
                 }
             }
 
             if (livingEntity instanceof Ancient_Remnant_Entity) {
-                if(!PlayerDataManager.desertEyeKilled.get(player)) {
+                if (!PlayerDataManager.desertEyeKilled.get(player)) {
                     ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.desertEyeKilled.put(player, true);
                 }
             }
 
             if (livingEntity instanceof Ender_Guardian_Entity) {
-                if(!PlayerDataManager.voidEyeKilled.get(player)) {
+                if (!PlayerDataManager.voidEyeKilled.get(player)) {
                     ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.voidEyeKilled.put(player, true);
                 }
             }
 
             if (livingEntity instanceof Netherite_Monstrosity_Entity) {
-                if(!PlayerDataManager.monstEyeKilled.get(player)) {
+                if (!PlayerDataManager.monstEyeKilled.get(player)) {
                     ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.monstEyeKilled.put(player, true);
                 }
             }
 
             if (livingEntity instanceof The_Harbinger_Entity) {
-                if(!PlayerDataManager.mechEyeKilled.get(player)) {
+                if (!PlayerDataManager.mechEyeKilled.get(player)) {
                     ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.mechEyeKilled.put(player, true);
                 }
@@ -337,14 +332,14 @@ public class LivingEntityEventListeners {
             }
 
             //末影龙掉个钥匙
-            if(livingEntity instanceof EnderDragon) {
+            if (livingEntity instanceof EnderDragon) {
                 ItemUtil.addItemEntity(livingEntity, BTItems.END_MONOLITH_KEY.get(), 1, ChatFormatting.GOLD.getColor().intValue());
             }
 
             if (livingEntity instanceof Bone_Chimera_Entity boneChimeraEntity && WorldUtil.isInStructure(livingEntity, WorldUtil.BONE_CHIMERA_STRUCTURE) && !livingEntity.getPersistentData().getBoolean("already_respawn")) {
                 //偷懒，直接秽土转生
                 SoulEntity soulEntity = EntityRespawnerMod.addToRespawn(boneChimeraEntity, 200, true);
-                if(boneChimeraEntity.getPersistentData().contains("spawnX") && soulEntity != null) {
+                if (boneChimeraEntity.getPersistentData().contains("spawnX") && soulEntity != null) {
                     soulEntity.setPos(readSpawnPos(boneChimeraEntity));
                 }
                 livingEntity.getPersistentData().putBoolean("already_respawn", true);
@@ -380,14 +375,9 @@ public class LivingEntityEventListeners {
         }
 
         //似了换地狱傀儡出来
-        if(livingEntity instanceof EnderDragon enderDragon) {
+        if (livingEntity instanceof EnderDragon enderDragon) {
             enderDragon.discard();
             //TODO 似了掉钥匙，开末地傀儡用
-        }
-
-        //关闭屏障
-        if(livingEntity instanceof SkyGolem skyGolem) {
-            handleNearByBlock(skyGolem.level(), skyGolem.getEntityData().get(((AbstractGolemInvoker)skyGolem).getSpawnPosKey()), 20, blockState -> setInvisible(blockState, true));
         }
 
         if (livingEntity instanceof ServerPlayer serverPlayer && !event.isCanceled()) {
@@ -412,22 +402,6 @@ public class LivingEntityEventListeners {
                     arterius.resetBossStatus(true);
                 }
             }
-        }
-    }
-
-    public static void handleNearByBlock(Level level, BlockPos center, int r, Consumer<BlockState> handler) {
-        for(BlockPos pos : BlockPos.betweenClosed(center.getX() - r, center.getY() -r,  center.getZ() - r,center.getX() + r, center.getY() + r, center.getZ() + r)) {
-            BlockState state = level.getBlockState(pos);
-            handler.accept(state);
-        }
-    }
-
-    /**
-     * 转换boss门方块
-     */
-    public static void setInvisible(BlockState state, boolean invisible) {
-        if(state.getBlock() instanceof DoorwayBlock) {
-            state.setValue(DoorwayBlock.INVISIBLE, invisible);
         }
     }
 
@@ -491,11 +465,6 @@ public class LivingEntityEventListeners {
             arterius.setInBattle(false);
         }
 
-        //开启屏障
-        if(event.getEntity() instanceof SkyGolem skyGolem) {
-            handleNearByBlock(skyGolem.level(), skyGolem.getEntityData().get(((AbstractGolemInvoker)skyGolem).getSpawnPosKey()), 20, blockState -> setInvisible(blockState, false));
-        }
-
         ServerLevel serverLevel = (ServerLevel) event.getEntity().level();
 
         if (event.getEntity() instanceof BulldrogiothEntity bulldrogiothEntity) {
@@ -518,7 +487,7 @@ public class LivingEntityEventListeners {
 //        }
 
         //移除远古守卫者在海洋塔的生成
-        if(event.getEntity() instanceof Guardian guardian && WorldUtil.isInStructure(guardian, WorldUtil.OCEAN_GOLEM)) {
+        if (event.getEntity() instanceof Guardian guardian && WorldUtil.isInStructure(guardian, WorldUtil.OCEAN_GOLEM)) {
             event.setCanceled(true);
         }
 
@@ -550,7 +519,7 @@ public class LivingEntityEventListeners {
     }
 
     public static void saveSpawnPos(Entity entity) {
-        if(!entity.getPersistentData().contains("spawnX")) {
+        if (!entity.getPersistentData().contains("spawnX")) {
             entity.getPersistentData().putDouble("spawnX", entity.getX());
             entity.getPersistentData().putDouble("spawnY", entity.getY());
             entity.getPersistentData().putDouble("spawnZ", entity.getZ());
