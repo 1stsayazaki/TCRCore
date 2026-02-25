@@ -9,20 +9,6 @@
           "weight": 10
         },
         {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "irons_spellbooks:scroll",
-          "functions": [
-            {
-              "function": "irons_spellbooks:randomize_spell",
-              "quality": {
-                "min": 0.25,
-                "max": 0.75
-              }
-            }
-          ]
-        },
-        {
           "weight": 5,
           "type": "minecraft:loot_table",
           "name": "irons_spellbooks:magic_items/good_ink",

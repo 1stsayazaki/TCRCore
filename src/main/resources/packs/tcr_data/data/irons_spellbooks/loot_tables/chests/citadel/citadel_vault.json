@@ -69,56 +69,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "irons_spellbooks:scroll",
-          "functions": [
-            {
-              "function": "irons_spellbooks:randomize_spell",
-              "quality": {
-                "min": 0.5,
-                "max": 1.0
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "irons_spellbooks:scroll",
-          "functions": [
-            {
-              "function": "irons_spellbooks:randomize_spell",
-              "quality": {
-                "min": 0.5,
-                "max": 1.0
-              },
-              "spell_filter": {
-                "school": "irons_spellbooks:fire"
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 2,
-          "name": "irons_spellbooks:scroll",
-          "functions": [
-            {
-              "function": "irons_spellbooks:randomize_spell",
-              "quality": {
-                "min": 0.0,
-                "max": 0.5
-              },
-              "spell_filter": {
-                "spells": [
-                  "irons_spellbooks:raise_hell"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "weight": 4,
           "name": "irons_spellbooks:blank_rune"
         }

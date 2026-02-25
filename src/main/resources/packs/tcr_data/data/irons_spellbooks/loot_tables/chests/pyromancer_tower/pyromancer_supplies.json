@@ -58,30 +58,6 @@
       ]
     },
     {
-      "rolls": {
-        "min": 0,
-        "max": 2
-      },
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "irons_spellbooks:scroll",
-          "functions": [
-            {
-              "function": "irons_spellbooks:randomize_spell",
-              "spell_filter": {
-                "school": "irons_spellbooks:fire"
-              },
-              "quality": {
-                "min": 0.1,
-                "max": 0.65
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
       "rolls": 1,
       "entries": [
         {

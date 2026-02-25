@@ -35,22 +35,6 @@
       "rolls": 2,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "irons_spellbooks:scroll",
-          "functions": [
-            {
-              "function": "irons_spellbooks:randomize_spell",
-              "quality": {
-                "min": 0.0,
-                "max": 0.5
-              },
-              "spell_filter": {
-                "school": "irons_spellbooks:ice"
-              }
-            }
-          ]
-        },
-        {
           "type": "minecraft:empty"
         }
       ]

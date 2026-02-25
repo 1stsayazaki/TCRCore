@@ -18,22 +18,6 @@
         {
           "type": "minecraft:loot_table",
           "name": "irons_spellbooks:magic_items/decent_ink"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "irons_spellbooks:scroll",
-          "functions": [
-            {
-              "function": "irons_spellbooks:randomize_spell",
-              "quality": {
-                "min": 0.2,
-                "max": 0.5
-              },
-              "spell_filter": {
-                "school": "irons_spellbooks:ice"
-              }
-            }
-          ]
         }
       ],
       "conditions": [

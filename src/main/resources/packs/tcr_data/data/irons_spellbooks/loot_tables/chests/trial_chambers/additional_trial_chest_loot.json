@@ -34,20 +34,6 @@
       "rolls": 2,
       "entries": [
         {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "irons_spellbooks:scroll",
-          "functions": [
-            {
-              "function": "irons_spellbooks:randomize_spell",
-              "quality": {
-                "min": 0.0,
-                "max": 0.7
-              }
-            }
-          ]
-        },
-        {
           "type": "minecraft:empty",
           "weight": 3
         }
