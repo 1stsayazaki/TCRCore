@@ -15,6 +15,9 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["6C743EF6251C4026"]
+			hide_dependency_lines: true
+			hide_until_deps_complete: true
 			id: "3825BFB29CCBF7E9"
 			rewards: [{
 				id: "21A87AFB115FE365"
@@ -32,19 +35,205 @@
 				}
 				type: "item"
 			}]
-			x: -0.5d
-			y: -0.5d
+			x: -1.0d
+			y: 0.5d
 		}
 		{
 			id: "048CB00656EE47EF"
+			invisible: true
+			rewards: [{
+				id: "3FD22765C4916DC6"
+				type: "xp"
+				xp: 1
+			}]
 			tasks: [{
 				advancement: "tcrcore:unlock_epic_boss"
 				criterion: ""
 				id: "2C5FA8ACCAB07D14"
 				type: "advancement"
 			}]
-			x: -0.5d
-			y: 1.0d
+			x: 1.0d
+			y: 0.5d
+		}
+		{
+			id: "6C743EF6251C4026"
+			rewards: [{
+				id: "1C7C33F6A794AFF2"
+				type: "xp"
+				xp: 1
+			}]
+			tasks: [{
+				id: "6FBAB272CAF44C38"
+				item: "tcrcore:wither_soul_stone"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["048CB00656EE47EF"]
+			hide_dependency_lines: true
+			id: "694E0FA7BB8B0BF9"
+			rewards: [{
+				id: "6F403FCAE2AA6DC5"
+				type: "xp"
+				xp: 1
+			}]
+			shape: "none"
+			size: 1.5d
+			tasks: [{
+				entity: "tcr_bosses:ignis_humanoid"
+				id: "5262251A70C63296"
+				type: "kill"
+				value: 1L
+			}]
+			x: 0.0d
+			y: -5.0d
+		}
+		{
+			dependencies: ["048CB00656EE47EF"]
+			hide_dependency_lines: true
+			id: "53CFE811E8DFC94B"
+			rewards: [{
+				id: "2D99EEE119BDC388"
+				type: "xp"
+				xp: 1
+			}]
+			shape: "none"
+			size: 1.5d
+			tasks: [{
+				entity: "tcr_bosses:ancient_remnant_humanoid"
+				icon: "tcrcore:desert_fragment"
+				id: "520B1CBA45A7804E"
+				type: "kill"
+				value: 1L
+			}]
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["048CB00656EE47EF"]
+			hide_dependency_lines: true
+			id: "53F18B77C2660FB3"
+			rewards: [{
+				id: "0E185AFD8CE58FD3"
+				type: "xp"
+				xp: 1
+			}]
+			shape: "none"
+			size: 1.5d
+			tasks: [{
+				entity: "tcr_bosses:ender_guardian_humanoid"
+				icon: "tcrcore:ender_fragment"
+				id: "56FA145B3D60E8DB"
+				type: "kill"
+				value: 1L
+			}]
+			x: 0.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["048CB00656EE47EF"]
+			hide_dependency_lines: true
+			id: "6DEFCFCCA208D4B5"
+			rewards: [{
+				id: "55256E271EF21ACF"
+				type: "xp"
+				xp: 1
+			}]
+			shape: "none"
+			size: 1.5d
+			tasks: [{
+				entity: "tcr_bosses:scylla_humanoid"
+				icon: "tcrcore:storm_fragment"
+				id: "7D068830BC257276"
+				type: "kill"
+				value: 1L
+			}]
+			x: 5.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["048CB00656EE47EF"]
+			hide_dependency_lines: true
+			id: "07B1764854F554EC"
+			rewards: [{
+				id: "0FF8F545EA902A18"
+				type: "xp"
+				xp: 1
+			}]
+			shape: "none"
+			size: 1.5d
+			tasks: [{
+				entity: "tcr_bosses:leviathan_humanoid"
+				icon: "tcrcore:abyss_fragment"
+				id: "44062C8798A4DB80"
+				type: "kill"
+				value: 1L
+			}]
+			x: -5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["048CB00656EE47EF"]
+			hide_dependency_lines: true
+			id: "5DC5B9BF9FC71C81"
+			rewards: [{
+				id: "5B59BE40C8077B5B"
+				type: "xp"
+				xp: 1
+			}]
+			shape: "none"
+			size: 1.5d
+			tasks: [{
+				entity: "tcr_bosses:maledictus_humanoid"
+				icon: "tcrcore:divine_fragment"
+				id: "262AD844244140AB"
+				type: "kill"
+				value: 1L
+			}]
+			x: -5.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["048CB00656EE47EF"]
+			hide_dependency_lines: true
+			id: "2D463BC74C77DD06"
+			rewards: [{
+				id: "0359FF1A7F28D235"
+				type: "xp"
+				xp: 1
+			}]
+			tasks: [{
+				entity: "tcr_bosses:harbinger_humanoid"
+				icon: "tcrcore:mech_fragment"
+				id: "5A5DD03D372CBBF4"
+				type: "kill"
+				value: 1L
+			}]
+			x: -5.0d
+			y: -5.0d
+		}
+		{
+			dependencies: ["048CB00656EE47EF"]
+			hide_dependency_lines: true
+			id: "49C81203A9E34F2B"
+			rewards: [{
+				id: "4AE33AAD75BE8DDD"
+				type: "xp"
+				xp: 1
+			}]
+			shape: "none"
+			size: 1.5d
+			tasks: [{
+				entity: "tcr_bosses:netherite_humanoid"
+				icon: "tcrcore:netherite_fragment"
+				id: "3E67CB9B98E6D60A"
+				type: "kill"
+				value: 1L
+			}]
+			x: 5.0d
+			y: -5.0d
 		}
 	]
 	title: "轮回绝境"
