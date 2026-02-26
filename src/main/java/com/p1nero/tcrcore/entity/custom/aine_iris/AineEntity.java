@@ -330,10 +330,12 @@ public class AineEntity extends PathfinderMob implements IEntityNpc, GeoEntity, 
             TCRQuests.TALK_TO_CHRONOS_4.start(serverPlayer);
         }
 
+        //解锁魔法图鉴
         if (code == 5) {
             TCRQuests.TALK_TO_AINE_MAGIC.finish(serverPlayer);
             TCRQuests.TRY_TO_LEARN_MAGIC.start(serverPlayer);
             TCRAdvancementData.finishAdvancement("unlock_magic_and_boss", serverPlayer);
+            ItemUtil.addItemEntity(serverPlayer, getSpellScroll(SpellRegistry.MAGIC_ARROW_SPELL.get()), ChatFormatting.AQUA.getColor());
             PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new PlayTitlePacket(PlayTitlePacket.UNLOCK_NEW_CHAPTER), serverPlayer);
         }
 

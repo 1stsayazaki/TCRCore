@@ -477,7 +477,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addDialogAnswer(TCREntities.AINE.get(), 15, "[%s]上带给了我们两个信息，§6其一是，它为我们描绘了世界上大部分受到黑潮侵蚀的魔物！");
         this.addDialogAnswer(TCREntities.AINE.get(), 16, "§6其二是，它上面记载了这个世界上的魔法！哼哼，这里的魔法和我所学的魔法有异曲同工之妙呢！");
         this.addDialogAnswer(TCREntities.AINE.get(), 17, "卷轴描绘了法术源质及其对应的法术，§6将图鉴所描述的法术源质带给我，我将为你转化成对应的法术卷轴");
-        this.addDialogAnswer(TCREntities.AINE.get(), 18, "§6将武器交给我，我将把卷轴所记载的法术附魔在武器上！§f快去试试吧！");
+        this.addDialogAnswer(TCREntities.AINE.get(), 18, "§6将武器交给我，我将把卷轴所记载的法术附魔在武器上！§f我这里刚好有本卷轴，快去试试吧！");
         this.addDialogAnswer(TCREntities.AINE.get(), 19, "%s, 看来你已经学会如何为武器附魔啦！现在本姑娘就教教你如何释放法术！§6好好看，好好学，我只教一遍！");
         this.addDialogAnswer(TCREntities.AINE.get(), 20, "持有附魔的武器时，按下[%s]即可释放对应的法术。怎么样，很简单吧？");
         this.addDialogAnswer(TCREntities.AINE.get(), 21, "使用法术会消耗法力值，法力值耗尽则无法使用法术。§6注意，法力值只能在主城进行回复！ 离开了主城我便无法为你注入魔力。§f不过，还有一件事...");

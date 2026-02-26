@@ -4,8 +4,10 @@ import com.google.common.collect.ImmutableList;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.entity.custom.CustomColorItemEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -100,35 +102,44 @@ public class ItemUtil {
     }
 
     public static CustomColorItemEntity addItemEntity(Entity spawnOn, Item item, int count){
+        if(spawnOn instanceof Player player) {
+            player.displayClientMessage(TCRCoreMod.getInfo("add_item_tip", item.getDefaultInstance().getDisplayName(), count), false);
+        }
         CustomColorItemEntity itemEntity = new CustomColorItemEntity(spawnOn.level(), spawnOn.getX(), spawnOn.getY(), spawnOn.getZ(), item.getDefaultInstance().copyWithCount(count));
-        itemEntity.setPickUpDelay(0);
+        itemEntity.setPickUpDelay(5);
         spawnOn.level().addFreshEntity(itemEntity);
         return itemEntity;
     }
 
     public static CustomColorItemEntity addItemEntity(Entity spawnOn, ItemStack item, int color){
+        if(spawnOn instanceof Player player) {
+            player.displayClientMessage(TCRCoreMod.getInfo("add_item_tip", item.getDisplayName(),  item.getCount()), false);
+        }
         CustomColorItemEntity itemEntity = new CustomColorItemEntity(spawnOn.level(), spawnOn.getX(), spawnOn.getY(), spawnOn.getZ(), item);
-        itemEntity.setPickUpDelay(0);
+        itemEntity.setPickUpDelay(5);
         itemEntity.setTeamColor(color);
         spawnOn.level().addFreshEntity(itemEntity);
         return itemEntity;
     }
 
     public static CustomColorItemEntity addItemEntity(Entity spawnOn, ItemStack item){
+        if(spawnOn instanceof Player player) {
+            player.displayClientMessage(TCRCoreMod.getInfo("add_item_tip", item.getDisplayName(),  item.getCount()), false);
+        }
         CustomColorItemEntity itemEntity = new CustomColorItemEntity(spawnOn.level(), spawnOn.getX(), spawnOn.getY(), spawnOn.getZ(), item);
-        itemEntity.setPickUpDelay(0);
+        itemEntity.setPickUpDelay(5);
         spawnOn.level().addFreshEntity(itemEntity);
         return itemEntity;
     }
     public static CustomColorItemEntity addItemEntity(ServerLevel level, BlockPos pos, ItemStack item){
         CustomColorItemEntity itemEntity = new CustomColorItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), item);
-        itemEntity.setPickUpDelay(0);
+        itemEntity.setPickUpDelay(5);
         level.addFreshEntity(itemEntity);
         return itemEntity;
     }
     public static CustomColorItemEntity addItemEntity(ServerLevel level, double x, double y, double z, ItemStack item){
         CustomColorItemEntity itemEntity = new CustomColorItemEntity(level, x, y, z, item);
-        itemEntity.setPickUpDelay(0);
+        itemEntity.setPickUpDelay(5);
         level.addFreshEntity(itemEntity);
         return itemEntity;
     }
