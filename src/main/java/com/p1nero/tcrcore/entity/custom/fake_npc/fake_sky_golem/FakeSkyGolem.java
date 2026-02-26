@@ -6,12 +6,16 @@ import com.p1nero.dialog_lib.api.component.DialogNode;
 import com.p1nero.dialog_lib.api.component.DialogueComponentBuilder;
 import com.p1nero.dialog_lib.client.screen.DialogueScreen;
 import com.p1nero.dialog_lib.client.screen.builder.DialogueScreenBuilder;
+import com.p1nero.fast_tpa.network.PacketRelay;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.capability.PlayerDataManager;
+import com.p1nero.tcrcore.capability.TCRQuestManager;
 import com.p1nero.tcrcore.capability.TCRQuests;
 import com.p1nero.tcrcore.entity.TCREntities;
 import com.p1nero.tcrcore.entity.custom.fake_npc.FakeNPCEntity;
 import com.p1nero.tcrcore.item.TCRItems;
+import com.p1nero.tcrcore.network.TCRPacketHandler;
+import com.p1nero.tcrcore.network.packet.clientbound.SetThirdPersonPacket;
 import com.p1nero.tcrcore.utils.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -140,13 +144,14 @@ public class FakeSkyGolem extends FakeNPCEntity {
     @Override
     public void handleNpcInteraction(ServerPlayer player, int i) {
         if(i == 1) {
-            if (!PlayerDataManager.stormEyeGotten.get(player)) {
-                ItemUtil.addItemEntity(player, ModItems.STORM_EYE.get(), 1, ChatFormatting.AQUA.getColor().intValue());
-                player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
-            }
             TCRQuests.TALK_TO_SKY_GOLEM.finish(player);
             canBeHurt = true;
-            ExecutionHandler.entityForceExecute(player, this, false);
+            PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new SetThirdPersonPacket(), player);
+            ItemUtil.addItemEntity(player, ModItems.STORM_EYE.get(), 1, ChatFormatting.AQUA.getColor().intValue());
+            player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
+            if(!ExecutionHandler.entityForceExecute(player, this, false)){
+                this.discard();
+            }
         }
         setConversingPlayer(null);
     }

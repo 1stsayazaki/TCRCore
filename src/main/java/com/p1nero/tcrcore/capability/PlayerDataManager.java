@@ -82,6 +82,15 @@ public class PlayerDataManager {
     public static BoolData monstEyeActivated = new BoolData("monstEyeActivated", false);
     public static BoolData voidEyeActivated = new BoolData("voidEyeActivated", false);
 
+    //是否打死过灾变人型
+    public static BoolData scyllaHumanoidKilled = new BoolData("scyllaHumanoidKilled", false);
+    public static BoolData ignisHumanoidKilled = new BoolData("ignisHumanoidKilled", false);
+    public static BoolData netheriteHumanoidKilled = new BoolData("netheriteHumanoidKilled", false);
+    public static BoolData maledictusHumanoidKilled = new BoolData("maledictusHumanoidKilled", false);
+    public static BoolData leviathanHumanoidKilled = new BoolData("leviathanHumanoidKilled", false);
+    public static BoolData enderGuardianHumanoidKilled = new BoolData("enderGuardianHumanoidKilled", false);
+    public static BoolData ancientRemnantHumanoidKilled = new BoolData("ancientRemnantHumanoidKilled", false);
+
     public static void putData(Player player, String key, double value) {
         getTCRPlayer(player).putDouble(key, value);
     }

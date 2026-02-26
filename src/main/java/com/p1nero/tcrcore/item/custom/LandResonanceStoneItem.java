@@ -60,7 +60,7 @@ public class LandResonanceStoneItem extends ResonanceStoneItem{
                     BlockPos pos1 = null;
                     try {
                         //以大地高塔为中心搜奇美拉的位置
-                        pos1 = WorldUtil.getNearbyStructurePosByCommand(serverPlayer.serverLevel(), pos, WorldUtil.BONE_CHIMERA_STRUCTURE, 130);
+                        pos1 = WorldUtil.getNearbyStructurePosByCommand(serverPlayer.serverLevel(), pos, WorldUtil.BONE_CHIMERA_STRUCTURE, 999);
                     } catch (Exception e) {
                         TCRCoreMod.LOGGER.error("TCRCore : Error finding structure [{}]: {}", WorldUtil.BONE_CHIMERA_STRUCTURE, e.getMessage());
                         player.displayClientMessage(TCRCoreMod.getInfo("resonance_search_failed", WorldUtil.BONE_CHIMERA_STRUCTURE).withStyle(ChatFormatting.RED), false);
@@ -71,6 +71,9 @@ public class LandResonanceStoneItem extends ResonanceStoneItem{
                     TCRPlayer tcrPlayer = TCRCapabilityProvider.getTCRPlayer(player);
                     BlockPos pos = posPair.first();
                     if(pos != null) {
+                        if(y == 999) {
+                            pos = WorldUtil.getSurfaceBlockPos(serverPlayer.serverLevel(), pos);
+                        }
                         tcrPlayer.playDirectionParticle(player.getEyePosition(), new Vec3(pos.getX(), player.getEyeY(), pos.getZ()));
                         serverPlayer.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(EpicSkillsSounds.GAIN_ABILITY_POINTS.get()), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
                     } else {
@@ -78,6 +81,9 @@ public class LandResonanceStoneItem extends ResonanceStoneItem{
                     }
                     BlockPos pos1 = posPair.second();
                     if(pos1 != null) {
+                        if(y == 999) {
+                            pos1 = WorldUtil.getSurfaceBlockPos(serverPlayer.serverLevel(), pos1);
+                        }
                         tcrPlayer.playDirectionParticle(player.getEyePosition(), new Vec3(pos1.getX(), player.getEyeY(), pos1.getZ()));
                         WaypointUtil.sendWaypoint(serverPlayer, "bone_chimera_mark", Component.translatable(Util.makeDescriptionId("structure", ResourceLocation.parse(WorldUtil.BONE_CHIMERA_STRUCTURE))), pos1, WaypointColor.YELLOW);
                     } else {

@@ -108,7 +108,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
 
         //主线·地狱之章
         this.addQuest(TCRQuests.TALK_TO_CHRONOS_8, "地狱之章", "和%s对话", "经过漫长的等待，%s已完成充能。快回去找%s吧！她在圣殿里等你。");
-        this.addQuest(TCRQuests.GO_TO_NETHER, "地狱之章", "前往[%s]", "散落在[%s]的神之眼皆已寻回，共鸣石或许无法在[%s]发挥作用。按%s所说，使用[%s]点燃黑曜石框架打开地狱之门（Gate of the Nether）吧！");
+        this.addQuest(TCRQuests.GO_TO_NETHER, "地狱之章", "前往[%s]", "散落在[%s]的神之眼皆已寻回，共鸣石或许无法在[%s]发挥作用。按%s所说，使用[%s]点燃黑曜石框架打开%s吧！");
         this.addQuest(TCRQuests.USE_NETHER_RESONANCE_STONE, "地狱之章", "使用[%s]", "你已经抵达[%s]，快使用[%s]吧！它将为我们指引[%s]的位置！到底有什么样的冒险在等着我们呢？");
         this.addQuest(TCRQuests.GET_MONST_EYE, "地狱之章", "寻回[%s]", "[%s]为我们标记了[%s]所散落的位置，快出发去寻回[%s]吧！ \n\n§a[提示]：建议装备[%s]");
         this.addQuest(TCRQuests.TALK_TO_CHRONOS_9, "地狱之章", "和%s对话", "[%s]已经寻回，快回主城找%s汇报吧！她将告诉我们下一步该做什么。");
@@ -134,7 +134,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addQuest(TCRQuests.GET_VOID_EYE, "终末之章", "寻回[%s]", "[%s]就在[%s]，拼尽全力夺回它！");
         this.addQuest(TCRQuests.TALK_TO_ORNN_YAMATO, "神兵之章", "和%s对话", "你意外地获得了[%s]，但它的力量似乎还未完全释放。快找%s聊聊吧！或许有什么办法可以让它恢复力量！");
 
-        this.addQuest(TCRQuests.TALK_TO_CHRONOS_END, "终章", "和%对话", "[%s]已经寻回...你终于集齐了8颗神之眼，是时候准备再创世仪式了。");
+        this.addQuest(TCRQuests.TALK_TO_CHRONOS_END, "终章", "和%s对话", "[%s]已经寻回...你终于集齐了8颗神之眼，是时候准备再创世仪式了。");
         this.addQuest(TCRQuests.KILL_MAD_CHRONOS, "终章", "击败[？？？]", "出现巨大的魔物，拼尽全力战胜祂！");
 
         this.addQuest(TCRQuests.TALK_TO_AINE_GAME_CLEAR, "后日谈", "和%s对话", "你，真的读懂[远梦之棺（The Casket of Reveries）]了吗？");
@@ -214,7 +214,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addInfo("can_not_guard", "Boss攻击将无视防御！");
         this.addInfo("pec_weapon_lock", "武器技能已锁定！在[%s]击败[%s]以解锁！");
         this.addInfo("resonance_stone_usage", "可与使徒封印的位置共鸣。");
-        this.addInfo("resonance_search_failed", "错误：无法共鸣！请稍后再试！[%s]");
+        this.addInfo("resonance_search_failed", "错误：无法共鸣！请重启游戏后再次尝试！[%s]");
         this.addInfo("yamato_skill_lock", "[%s]已锁定，需对应附魔书以解锁！");
         this.addInfo("congratulation", "恭喜！");
         this.addInfo("open_backpack_tutorial", "按下 [%s] 以打开随身空间");
@@ -335,6 +335,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.add(TCREntities.AINE.get(), "安");
         this.add(TCREntities.ORNN.get(), "老奥恩");
         this.add(TCREntities.TUTORIAL_GOLEM.get(), "训练傀儡");
+        this.add(TCREntities.TCR_MIMIC.get(), "我？");
 
         this.add(TCRBossEntities.LEVIATHAN_HUMANOID.get(), "沧溟|Thalassa-Mare");
         this.add(TCRBossEntities.HARBINGER_HUMANOID.get(), "归寂|Letum-Quietus");
@@ -430,7 +431,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 39, "黑潮过后，阴阳平衡被打乱，亡灵也不断涌入主世界，无法轮回。");
         this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 40, "出发吧，趁我的力量还未完全消退，§6以生命之源浇灌萤石所筑之框，即可开启天堂之门！§f待阁下步入天域（The Aether），再以共鸣石寻[%s]之所在吧。");
         this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 41, "天域凶险，吾将赐予阁下§6[御剑(Sword Soaring)]§f的祝福！");
-        this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 42, "咳咳，阁下，你来了，咳咳...寻找[%s]可还顺利？");
+        this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 42, "咳咳，阁下，你来了，咳咳...寻找[%s]的旅途可还顺利？");
         this.addDialogOption(TCREntities.CHRONOS_SOL.get(), 14, "%s，");
         this.addDialogOption(TCREntities.CHRONOS_SOL.get(), 15, "我已知晓我是谁");
         this.addDialogAnswer(TCREntities.CHRONOS_SOL.get(), 43, "...（你将%s发生的事告诉了%s）");

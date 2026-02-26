@@ -59,7 +59,7 @@ public class OceanResonanceStoneItem extends ResonanceStoneItem{
 
                     BlockPos pos1 = null;
                     try {
-                        //以大地高塔为中心搜奇美拉的位置
+                        //以海洋塔为中心搜呱呱村的位置
                         pos1 = WorldUtil.getNearbyStructurePosByCommand(serverPlayer.serverLevel(), pos, WorldUtil.RIBBIT_VILLAGE, 130);
                     } catch (Exception e) {
                         TCRCoreMod.LOGGER.error("TCRCore : Error finding structure [{}]: {}", WorldUtil.RIBBIT_VILLAGE, e.getMessage());
@@ -78,6 +78,7 @@ public class OceanResonanceStoneItem extends ResonanceStoneItem{
                     }
                     BlockPos pos1 = posPair.second();
                     if(pos1 != null) {
+                        pos1 = WorldUtil.getSurfaceBlockPos(serverPlayer.serverLevel(), pos1);
                         tcrPlayer.playDirectionParticle(player.getEyePosition(), new Vec3(pos1.getX(), player.getEyeY(), pos1.getZ()));
                         WaypointUtil.sendWaypoint(serverPlayer, "ribbit_village_mark", Component.translatable(Util.makeDescriptionId("structure", ResourceLocation.parse(WorldUtil.RIBBIT_VILLAGE))), pos1, WaypointColor.BLUE);
                     } else {

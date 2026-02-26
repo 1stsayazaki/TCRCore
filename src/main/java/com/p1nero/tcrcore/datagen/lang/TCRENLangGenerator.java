@@ -116,7 +116,7 @@ public class TCRENLangGenerator extends TCRLangProvider {
         this.addInfo("can_not_guard", "Boss attacks cannot be blocked!");
         this.addInfo("pec_weapon_lock", "Weapon skill locked! Defeat [%s] in [%s] to unlock!");
         this.addInfo("resonance_stone_usage", "Can resonate with the location of the Angel's seal");
-        this.addInfo("resonance_search_failed", "ERROR：Failed to Resonate！Please use locate command or structure compass to search [%s]");
+        this.addInfo("resonance_search_failed", "[ERROR]：Failed to Resonate! Please retry after restarting the game! [%s]");
         this.addInfo("yamato_skill_lock", "[%s] are locked. Requires special enchantment book to unlock!");
         this.addInfo("congratulation", "Congratulations!");
         this.addInfo("open_backpack_tutorial", "Press [%s] to view Backpack");
@@ -235,6 +235,7 @@ public class TCRENLangGenerator extends TCRLangProvider {
         this.add(TCREntities.ORNN.get(), "Old Ornn");
         this.add(TCREntities.AINE.get(), "Aine");
         this.add(TCREntities.TUTORIAL_GOLEM.get(), "Training Golem");
+        this.add(TCREntities.TCR_MIMIC.get(), "Me?");
 
         this.add(TCRBossEntities.LEVIATHAN_HUMANOID.get(), "Thalassa Mare");
         this.add(TCRBossEntities.HARBINGER_HUMANOID.get(), "Letum Quietus");

@@ -40,6 +40,7 @@ public class TCRPacketHandler {
 
         register(RefreshClientQuestsPacket.class, RefreshClientQuestsPacket::decode);
 
+        register(SetThirdPersonPacket.class, SetThirdPersonPacket::decode);
         register(OpenEndScreenPacket.class, OpenEndScreenPacket::decode);
         register(OpenCustomDialogPacket.class, OpenCustomDialogPacket::decode);
         register(PlayItemPickupParticlePacket.class, PlayItemPickupParticlePacket::decode);

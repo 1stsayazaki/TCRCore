@@ -259,6 +259,11 @@ public class WorldUtil {
         return baseCommandBlock.getLastOutput().getString();
     }
 
+
+    public static BlockPos getSurfaceBlockPos(ServerLevel serverLevel, BlockPos pos) {
+        return getSurfaceBlockPos(serverLevel, pos.getX(), pos.getZ());
+    }
+
     public static BlockPos getSurfaceBlockPos(ServerLevel serverLevel, int x, int z) {
         int height = serverLevel.getHeight();
         int minY = serverLevel.getMinBuildHeight();

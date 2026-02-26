@@ -7,12 +7,15 @@ import com.p1nero.dialog_lib.api.component.DialogNode;
 import com.p1nero.dialog_lib.api.component.DialogueComponentBuilder;
 import com.p1nero.dialog_lib.client.screen.DialogueScreen;
 import com.p1nero.dialog_lib.client.screen.builder.DialogueScreenBuilder;
+import com.p1nero.fast_tpa.network.PacketRelay;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.capability.PlayerDataManager;
 import com.p1nero.tcrcore.capability.TCRQuests;
 import com.p1nero.tcrcore.entity.TCREntities;
 import com.p1nero.tcrcore.entity.custom.fake_npc.FakeNPCEntity;
 import com.p1nero.tcrcore.item.TCRItems;
+import com.p1nero.tcrcore.network.TCRPacketHandler;
+import com.p1nero.tcrcore.network.packet.clientbound.SetThirdPersonPacket;
 import com.p1nero.tcrcore.utils.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -88,10 +91,14 @@ public class FakeEndGolem extends FakeNPCEntity {
     @Override
     public void handleNpcInteraction(ServerPlayer player, int i) {
         if(i == 1 || i == 2) {
-            ExecutionHandler.entityForceExecute(player, this, false);
+            canBeHurt = true;
+            PacketRelay.sendToPlayer(TCRPacketHandler.INSTANCE, new SetThirdPersonPacket(), player);
             ItemUtil.addItemEntity(player, ModItems.VOID_EYE.get(), 1, ChatFormatting.LIGHT_PURPLE.getColor().intValue());
             if(i == 2) {
                 ItemUtil.addItemEntity(player, EFNItem.YAMATO_DMC_IN_SHEATH.get(), 1, ChatFormatting.LIGHT_PURPLE.getColor().intValue());
+            }
+            if(!ExecutionHandler.entityForceExecute(player, this, false)) {
+                this.discard();
             }
         }
         setConversingPlayer(null);

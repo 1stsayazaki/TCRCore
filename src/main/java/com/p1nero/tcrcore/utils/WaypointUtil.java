@@ -63,7 +63,7 @@ public class WaypointUtil {
             } else {
                 text = name;
             }
-            Waypoint instant = new Waypoint(pos.getX(), pos.getY() + 2, pos.getZ(), text, text.substring(0, 1), color == null ? xaero.hud.minimap.waypoint.WaypointColor.getRandom() : color , WaypointPurpose.NORMAL, false);
+            Waypoint instant = new Waypoint(pos.getX(), pos.getY() + 2, pos.getZ(), text, text.substring(0, 2), color == null ? xaero.hud.minimap.waypoint.WaypointColor.getRandom() : color , WaypointPurpose.NORMAL, false);
             instant.setVisibility(type);
             waypoints.add(instant);
             save(Minecraft.getInstance().player);

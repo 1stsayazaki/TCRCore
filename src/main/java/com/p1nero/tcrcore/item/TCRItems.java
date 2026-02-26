@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -45,7 +46,7 @@ public class TCRItems {
     public static final RegistryObject<Item> RESONANCE_STONE = REGISTRY.register("resonance_stone", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> LAND_RESONANCE_STONE = REGISTRY.register("land_resonance_stone",
-            () -> new LandResonanceStoneItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), ResourceLocation.parse(WorldUtil.LAND_GOLEM), 114, Level.OVERWORLD, (serverPlayer) ->
+            () -> new LandResonanceStoneItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), ResourceLocation.parse(WorldUtil.LAND_GOLEM), ResonanceStoneItem.SURFACE, Level.OVERWORLD, (serverPlayer) ->
                     TCRQuestManager.hasQuest(serverPlayer, TCRQuests.USE_LAND_RESONANCE_STONE) || serverPlayer.isCreative(),
                     ((pos, serverPlayer) -> {
                         if(pos != null) {
@@ -112,11 +113,11 @@ public class TCRItems {
     );
 
     public static final RegistryObject<Item> END_RESONANCE_STONE = REGISTRY.register("end_resonance_stone",
-            () -> new ResonanceStoneItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), ResourceLocation.parse(WorldUtil.STRONG_HOLD), 80, Level.OVERWORLD, (serverPlayer) ->
+            () -> new ResonanceStoneItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), ResourceLocation.parse(WorldUtil.STRONG_HOLD), ResonanceStoneItem.SURFACE, Level.OVERWORLD, (serverPlayer) ->
                     TCRQuestManager.hasQuest(serverPlayer, TCRQuests.USE_END_RESONANCE_STONE) || serverPlayer.isCreative(),
                     ((pos, serverPlayer) ->
                     {
-                        WaypointUtil.sendWaypoint(serverPlayer, "eye_pos_mark", TCRCoreMod.getInfo("eye_pos_mark", Component.translatable("structure.integrated_stronghold.stronghold")), pos, WaypointColor.PURPLE);
+                        WaypointUtil.sendWaypoint(serverPlayer, "eye_pos_mark", TCRCoreMod.getInfo("eye_pos_mark", Blocks.END_PORTAL.getName(), Component.translatable("structure.integrated_stronghold.stronghold")), pos, WaypointColor.PURPLE);
                         TCRQuests.USE_END_RESONANCE_STONE.finish(serverPlayer, true);
                         TCRQuests.GO_TO_THE_END.start(serverPlayer);
                     }))

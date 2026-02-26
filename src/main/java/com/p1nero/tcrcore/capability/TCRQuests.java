@@ -399,7 +399,7 @@ public class TCRQuests {
 
         GO_TO_NETHER = TCRQuestManager.create("go_to_nether")
                 .shortDescParam(WorldUtil.NETHER_NAME)
-                .descParam(WorldUtil.OVERWORLD_NAME, WorldUtil.OVERWORLD_NAME, TCREntities.CHRONOS_SOL.get().getDescription(), TCRItems.CORE_FLINT.get().getDescription());
+                .descParam(WorldUtil.OVERWORLD_NAME, WorldUtil.OVERWORLD_NAME, TCREntities.CHRONOS_SOL.get().getDescription(), TCRItems.CORE_FLINT.get().getDescription(), Blocks.NETHER_PORTAL.getName());
 
         USE_NETHER_RESONANCE_STONE = TCRQuestManager.create("use_nether_resonance_stone")
                 .shortDescParam(TCRItems.NETHER_RESONANCE_STONE.get().getDescription().copy().withStyle(ChatFormatting.DARK_RED))

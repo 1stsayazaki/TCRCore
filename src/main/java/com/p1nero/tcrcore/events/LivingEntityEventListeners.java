@@ -36,7 +36,6 @@ import com.p1nero.tcr_bosses.entity.cataclysm.maledictus.MaledictusHumanoid;
 import com.p1nero.tcr_bosses.entity.cataclysm.netherite.NetheriteHumanoid;
 import com.p1nero.tcr_bosses.entity.cataclysm.scylla.ScyllaHumanoid;
 import com.p1nero.tcr_bosses.mixins.AbstractGolemInvoker;
-import com.p1nero.tcr_bosses.mixins.BTAbstractGolemAccessor;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.capability.PlayerDataManager;
 import com.p1nero.tcrcore.capability.TCRCapabilityProvider;
@@ -68,7 +67,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -136,30 +134,6 @@ public class LivingEntityEventListeners {
                     event.setCanceled(true);
                 }
             });
-        }
-
-        //重生保护
-        if (event.getEntity() instanceof Bone_Chimera_Entity boneChimeraEntity) {
-            if (boneChimeraEntity.isDeadOrDying()) {
-                event.setCanceled(true);
-            }
-        }
-
-        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-
-            //被打死重置状态
-            if (event.getSource().getEntity() instanceof Bone_Chimera_Entity boneChimeraEntity) {
-                boneChimeraEntity.getPersistentData().putBoolean("fighting", false);
-            }
-
-            EpicFightCapabilities.getUnparameterizedEntityPatch(serverPlayer, ServerPlayerPatch.class).ifPresent(serverPlayerPatch -> {
-                AnimationPlayer player = serverPlayerPatch.getAnimator().getPlayerFor(null);
-                //激流期间无敌
-                if (player != null && player.getAnimation() == Animations.TSUNAMI_REINFORCED) {
-                    event.setCanceled(true);
-                }
-            });
-
         }
 
     }
@@ -298,8 +272,8 @@ public class LivingEntityEventListeners {
             }
 
             if (livingEntity instanceof CaptainCornelia) {
-                givePlayerAward(player, 1);
                 if (TCRQuestManager.hasQuest(player, TCRQuests.GET_CURSED_EYE)) {
+                    givePlayerAward(player, 1);
                     ItemUtil.addItemEntity(player, ModItems.CURSED_EYE.get(), 1, ChatFormatting.DARK_GREEN.getColor().intValue());
                     ItemUtil.addItemEntity(player, TCRItems.NECROMANCY_SCROLL.get(), 1, ChatFormatting.DARK_GREEN.getColor().intValue());
                     player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
@@ -307,16 +281,16 @@ public class LivingEntityEventListeners {
             }
 
             if (livingEntity instanceof CoreGolem) {
-                givePlayerAward(player, 1);
                 if (TCRQuestManager.hasQuest(player, TCRQuests.GET_FLAME_EYE)) {
+                    givePlayerAward(player, 1);
                     ItemUtil.addItemEntity(player, ModItems.FLAME_EYE.get(), 1, ChatFormatting.RED.getColor().intValue());
                     player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
                 }
             }
 
             if (livingEntity instanceof NetherGolem) {
-                givePlayerAward(player, 1);
                 if (TCRQuestManager.hasQuest(player, TCRQuests.GET_MONST_EYE)) {
+                    givePlayerAward(player, 1);
                     ItemUtil.addItemEntity(player, ModItems.MONSTROUS_EYE.get(), 1, ChatFormatting.DARK_RED.getColor().intValue());
                     player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
                 }
@@ -333,6 +307,7 @@ public class LivingEntityEventListeners {
 
             if (livingEntity instanceof SkyGolem) {
                 if(TCRQuestManager.hasQuest(player, TCRQuests.GET_STORM_EYE)) {
+                    givePlayerAward(player, 1);
                     FakeSkyGolem fakeSkyGolem = new FakeSkyGolem(player);
                     fakeSkyGolem.setPos(player.position());
                     player.serverLevel().addFreshEntity(fakeSkyGolem);
@@ -340,65 +315,71 @@ public class LivingEntityEventListeners {
                 }
             }
 
-            if(livingEntity instanceof FakeSkyGolem) {
-                if (TCRQuestManager.hasQuest(player, TCRQuests.GET_STORM_EYE) &&(TCRQuests.TALK_TO_SKY_GOLEM.isFinished(player) || TCRQuestManager.hasQuest(player, TCRQuests.TALK_TO_SKY_GOLEM))) {
-                    givePlayerAward(player, 1);
-                    ItemUtil.addItemEntity(player, ModItems.STORM_EYE.get(), 1, ChatFormatting.AQUA.getColor().intValue());
-                    player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
-                }
-            }
-
             if (livingEntity instanceof EndGolem) {
                 if(TCRQuestManager.hasQuest(player, TCRQuests.GET_VOID_EYE)) {
+                    givePlayerAward(player, 2);
                     FakeEndGolem fakeEndGolem = new FakeEndGolem(player);
                     fakeEndGolem.setPos(player.position());
                     player.serverLevel().addFreshEntity(fakeEndGolem);
                 }
             }
 
-            if(livingEntity instanceof FakeEndGolem) {
-                if (TCRQuestManager.hasQuest(player, TCRQuests.GET_VOID_EYE) && (TCRQuests.GO_TO_THE_END.isFinished(player) || TCRQuestManager.hasQuest(player, TCRQuests.GO_TO_THE_END))) {
-                    givePlayerAward(player, 2);
-                    ItemUtil.addItemEntity(player, ModItems.VOID_EYE.get(), 1, ChatFormatting.LIGHT_PURPLE.getColor().intValue());
-                    player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
+            if(livingEntity instanceof ScyllaHumanoid) {
+                if(!PlayerDataManager.scyllaHumanoidKilled.get(player)) {
+                    givePlayerAward(player, 3);
+                    PECDataManager.ASTRAPE_LOCK.put(player, false);
+                    PECDataManager.CERAUNUS_LOCK.put(player, false);
+                    PlayerDataManager.scyllaHumanoidKilled.put(player, true);
                 }
             }
 
-            if(livingEntity instanceof ScyllaHumanoid) {
-                givePlayerAward(player, 3);
-                PECDataManager.ASTRAPE_LOCK.put(player, false);
-                PECDataManager.CERAUNUS_LOCK.put(player, false);
-            }
-
             if(livingEntity instanceof IgnisHumanoid) {
-                givePlayerAward(player, 3);
-                PECDataManager.THE_INCINERATOR_LOCK.put(player, false);
+                if(!PlayerDataManager.ignisHumanoidKilled.get(player)) {
+                    givePlayerAward(player, 3);
+                    PECDataManager.THE_INCINERATOR_LOCK.put(player, false);
+                    PlayerDataManager.ignisHumanoidKilled.put(player, true);
+                }
             }
 
             if(livingEntity instanceof NetheriteHumanoid) {
-                givePlayerAward(player, 3);
-                PECDataManager.INFERNAL_FORGE_LOCK.put(player, false);
+                if(!PlayerDataManager.netheriteHumanoidKilled.get(player)) {
+                    givePlayerAward(player, 3);
+                    PECDataManager.INFERNAL_FORGE_LOCK.put(player, false);
+                    PlayerDataManager.netheriteHumanoidKilled.put(player, true);
+                }
             }
 
             if(livingEntity instanceof MaledictusHumanoid) {
-                givePlayerAward(player, 3);
-                PECDataManager.DUAL_ANNIHILATOR_LOCK.put(player, false);
-                PECDataManager.SOUL_RENDER_LOCK.put(player, false);
+                if(!PlayerDataManager.maledictusHumanoidKilled.get(player)) {
+                    givePlayerAward(player, 3);
+                    PECDataManager.DUAL_ANNIHILATOR_LOCK.put(player, false);
+                    PECDataManager.SOUL_RENDER_LOCK.put(player, false);
+                    PlayerDataManager.maledictusHumanoidKilled.put(player, true);
+                }
             }
 
             if(livingEntity instanceof LeviathanHumanoid) {
-                givePlayerAward(player, 3);
-                PECDataManager.TIDAL_CLAW_LOCK.put(player, false);
+                if(!PlayerDataManager.leviathanHumanoidKilled.get(player)) {
+                    givePlayerAward(player, 3);
+                    PECDataManager.TIDAL_CLAW_LOCK.put(player, false);
+                    PlayerDataManager.leviathanHumanoidKilled.put(player, true);
+                }
             }
 
             if(livingEntity instanceof EnderGuardianHumanoid) {
-                givePlayerAward(player, 3);
-                PECDataManager.GAUNTLET_OF_GUARD_LOCK.put(player, false);
+                if(!PlayerDataManager.enderGuardianHumanoidKilled.get(player)) {
+                    givePlayerAward(player, 3);
+                    PECDataManager.GAUNTLET_OF_GUARD_LOCK.put(player, false);
+                    PlayerDataManager.enderGuardianHumanoidKilled.put(player, true);
+                }
             }
 
             if(livingEntity instanceof AncientRemnantHumanoid) {
-                givePlayerAward(player, 3);
-                PECDataManager.WRATH_OF_THE_DESERT_LOCK.put(player, false);
+                if(!PlayerDataManager.ancientRemnantHumanoidKilled.get(player)) {
+                    givePlayerAward(player, 3);
+                    PECDataManager.WRATH_OF_THE_DESERT_LOCK.put(player, false);
+                    PlayerDataManager.ancientRemnantHumanoidKilled.put(player, true);
+                }
             }
 
         });
@@ -446,7 +427,8 @@ public class LivingEntityEventListeners {
             if (livingEntity instanceof EnderDragon) {
                 if(livingEntity.getServer() != null) {
                     ServerLevel end = livingEntity.getServer().getLevel(Level.END);
-                    if(end != null && end.getEntities(BTEntityType.END_GOLEM.get(), (LivingEntity::isAlive)).isEmpty()) {
+                    if(end != null && end.getEntities(BTEntityType.END_GOLEM.get(), (LivingEntity::isAlive)).isEmpty()
+                        && end.getEntities(BTEntityType.END_MONOLITH.get(), Entity::isAlive).isEmpty()) {
                         BlockPos spawnPos = WorldUtil.getSurfaceBlockPos(end, 0, 0).above(5);
                         BTEntityType.END_GOLEM.get().spawn(end, spawnPos, MobSpawnType.MOB_SUMMONED);
                     }
@@ -555,21 +537,48 @@ public class LivingEntityEventListeners {
     }
 
     @SubscribeEvent
-    public static void onLivingHurt(LivingHurtEvent event) {
+    public static void onLivingHurt(LivingAttackEvent event) {
         if (TCRCoreMod.hasCheatMod()) {
             event.getEntity().setHealth(0);
         }
 
         if(event.getEntity() instanceof Player player && player.hasEffect(BTExtras.CORE_TEMPERATURE_EFFECT.get())) {
-            if(event.getSource().is(DamageTypeTags.IS_FIRE) || event.getSource().is(DamageTypes.LAVA)) {
+            if(event.getSource().is(DamageTypeTags.IS_FIRE)) {
+                event.getEntity().clearFire();
                 event.setCanceled(true);
             }
         }
 
-        if(event.getSource().is(DamageTypes.LAVA) || event.getSource().is(DamageTypes.IN_FIRE) || event.getSource().is(DamageTypes.ON_FIRE)) {
+        if(event.getSource().is(DamageTypeTags.IS_FIRE)) {
             if(event.getEntity() instanceof AbstractPiglin) {
+                event.getEntity().clearFire();
                 event.setCanceled(true);
             }
+        }
+
+
+        //重生保护
+        if (event.getEntity() instanceof Bone_Chimera_Entity boneChimeraEntity) {
+            if (boneChimeraEntity.isDeadOrDying()) {
+                event.setCanceled(true);
+            }
+        }
+
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+
+            //被打死重置状态
+            if (event.getSource().getEntity() instanceof Bone_Chimera_Entity boneChimeraEntity) {
+                boneChimeraEntity.getPersistentData().putBoolean("fighting", false);
+            }
+
+            EpicFightCapabilities.getUnparameterizedEntityPatch(serverPlayer, ServerPlayerPatch.class).ifPresent(serverPlayerPatch -> {
+                AnimationPlayer player = serverPlayerPatch.getAnimator().getPlayerFor(null);
+                //激流期间无敌
+                if (player != null && player.getAnimation() == Animations.TSUNAMI_REINFORCED) {
+                    event.setCanceled(true);
+                }
+            });
+
         }
 
     }

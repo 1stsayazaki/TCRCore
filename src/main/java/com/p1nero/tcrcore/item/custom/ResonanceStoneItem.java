@@ -3,24 +3,18 @@ package com.p1nero.tcrcore.item.custom;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.capability.TCRCapabilityProvider;
 import com.p1nero.tcrcore.capability.TCRPlayer;
-import com.p1nero.tcrcore.save_data.TCRMainLevelSaveData;
-import com.p1nero.tcrcore.utils.WaypointUtil;
 import com.p1nero.tcrcore.utils.WorldUtil;
 import com.yesman.epicskills.registry.entry.EpicSkillsSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -34,12 +28,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import xaero.hud.minimap.waypoint.WaypointColor;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class ResonanceStoneItem extends Item {
@@ -47,6 +39,7 @@ public class ResonanceStoneItem extends Item {
     protected final ResourceLocation targetStructure;
     protected final ResourceKey<Level> dimension;
     protected final int y;
+    public static final int SURFACE = 999;
     protected final BiConsumer<BlockPos, ServerPlayer> callback;
     protected final Predicate<ServerPlayer> predicate;
 
@@ -78,6 +71,9 @@ public class ResonanceStoneItem extends Item {
                 })
                 .thenAccept(pos -> {
                     if(pos != null) {
+                        if(y == SURFACE) {
+                            pos = WorldUtil.getSurfaceBlockPos(serverPlayer.serverLevel(), pos);
+                        }
                         TCRPlayer tcrPlayer = TCRCapabilityProvider.getTCRPlayer(player);
                         tcrPlayer.playDirectionParticle(player.getEyePosition(), new Vec3(pos.getX(), player.getEyeY(), pos.getZ()));
                         itemStack.shrink(1);

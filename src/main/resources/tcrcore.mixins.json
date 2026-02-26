@@ -44,6 +44,7 @@
     "MagnetUpgradeWrapperMixin",
     "MazeRoseMixin",
     "MenuHooksMixin",
+    "MimicBossBarMixin",
     "PlayerAdvancementsMixin",
     "PlayerPatchMixin",
     "PoisonedChakraMixin",

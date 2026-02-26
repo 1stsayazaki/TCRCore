@@ -286,9 +286,9 @@ public class ChronosSolEntity extends PathfinderMob implements IEntityNpc, GeoEn
                     .addChild(youLookTerrible);
 
         } else if(TCRQuests.TALK_TO_CHRONOS_12.equals(currentQuest)) {
-            root = new DialogNode(dBuilder.ans(42));
-            DialogNode chronos = new DialogNode(dBuilder.ans(43), dBuilder.opt(14, TCREntities.CHRONOS_SOL.get().getDescription()));
-            DialogNode known = new DialogNode(dBuilder.ans(43), dBuilder.opt(15));
+            root = new DialogNode(dBuilder.ans(42, ModItems.STORM_EYE.get().getDescription()));
+            DialogNode chronos = new DialogNode(dBuilder.ans(43, WorldUtil.AETHER_NAME, TCREntities.CHRONOS_SOL.get().getDescription()), dBuilder.opt(14, TCREntities.CHRONOS_SOL.get().getDescription()));
+            DialogNode known = new DialogNode(dBuilder.ans(43, WorldUtil.AETHER_NAME, TCREntities.CHRONOS_SOL.get().getDescription()), dBuilder.opt(15));
 
             DialogNode next = new DialogNode(dBuilder.ans(44), dBuilder.opt(-1))
                     .addChild(new DialogNode(dBuilder.ans(45), dBuilder.opt(-1))

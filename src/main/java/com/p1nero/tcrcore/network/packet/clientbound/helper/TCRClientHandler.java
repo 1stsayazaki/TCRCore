@@ -9,6 +9,7 @@ import com.p1nero.tcrcore.client.gui.screen.TCREndScreen;
 import com.p1nero.tcrcore.client.gui.screen.TCRQuestScreen;
 import com.p1nero.tcrcore.network.TCRPacketHandler;
 import com.p1nero.tcrcore.network.packet.serverbound.EndScreenCallbackPacket;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
@@ -85,6 +86,10 @@ public class TCRClientHandler {
 
     public static void refreshQuestScreen() {
         TCRQuestScreen.refreshSelectedQuest();
+    }
+
+    public static void setThirdPerson() {
+        Minecraft.getInstance().options.setCameraType(CameraType.THIRD_PERSON_BACK);
     }
 
 }

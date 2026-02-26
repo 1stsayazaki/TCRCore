@@ -18,6 +18,8 @@ import com.p1nero.tcrcore.entity.custom.fake_npc.fake_end_golem.FakeEndGolemRend
 import com.p1nero.tcrcore.entity.custom.fake_npc.fake_sky_golem.FakeSkyGolemRenderer;
 import com.p1nero.tcrcore.entity.custom.ferry_girl.FerryGirlGeoRenderer;
 import com.p1nero.tcrcore.entity.custom.chronos_sol.ChronosSolGeoRenderer;
+import com.p1nero.tcrcore.entity.custom.mimic.PTCRMimicRenderer;
+import com.p1nero.tcrcore.entity.custom.mimic.TCRMimicRenderer;
 import com.p1nero.tcrcore.entity.custom.ornn.OrnnlGeoRenderer;
 import com.p1nero.tcrcore.entity.custom.tutorial_golem.TutorialGolemRenderer;
 import net.minecraft.ChatFormatting;
@@ -51,6 +53,8 @@ public class ClientModEvents {
         EntityRenderers.register(TCREntities.FAKE_SKY_GOLEM.get(), FakeSkyGolemRenderer::new);
         EntityRenderers.register(TCREntities.FAKE_END_GOLEM.get(), FakeEndGolemRenderer::new);
         EntityRenderers.register(TCREntities.TUTORIAL_GOLEM.get(), TutorialGolemRenderer::new);
+
+        EntityRenderers.register(TCREntities.TCR_MIMIC.get(), TCRMimicRenderer::new);
 
         EntityRenderers.register(TCREntities.FAKE_MALEDICTUS_HUMANOID.get(),
                 context -> new FakeBossNpcRenderer(context, TCRMeshes.MALEDICTUS_HUMANOID_TEXTURE));
@@ -112,6 +116,8 @@ public class ClientModEvents {
         event.addPatchedEntityRenderer(EntityType.DROWNED, (entityType -> new PHumanoidRenderer<>(Meshes.BIPED_OLD_TEX, context, entityType)));
         event.addPatchedEntityRenderer(TCREntities.FAKE_SKY_GOLEM.get(), (entityType -> new PHumanoidRenderer<>(Meshes.BIPED_OLD_TEX, context, entityType)));
         event.addPatchedEntityRenderer(TCREntities.FAKE_END_GOLEM.get(), (entityType -> new PHumanoidRenderer<>(Meshes.BIPED_OLD_TEX, context, entityType)));
+
+        event.addPatchedEntityRenderer(TCREntities.TCR_MIMIC.get(), (entityType -> new PTCRMimicRenderer(Meshes.BIPED_OLD_TEX, context, entityType)));
 
         event.addPatchedEntityRenderer(TCREntities.FAKE_MALEDICTUS_HUMANOID.get(), (entityType ->
                 new PHumanoidRenderer<>(TCRMeshes.MALEDICTUS_HUMANOID, context, entityType)));
