@@ -3,6 +3,7 @@ package com.p1nero.tcrcore.item;
 import com.aetherteam.aether.data.resources.registries.AetherDimensions;
 import com.github.L_Ender.cataclysm.init.ModItems;
 import com.github.L_Ender.cataclysm.items.The_Incinerator;
+import com.p1nero.tcr_bosses.entity.TCRBossEntities;
 import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.capability.TCRQuestManager;
 import com.p1nero.tcrcore.capability.TCRQuests;
@@ -32,16 +33,15 @@ public class TCRItems {
     public static final RegistryObject<Item> PROOF_OF_ADVENTURE = REGISTRY.register("proof_of_adventure", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), true));
     public static final RegistryObject<Item> CORE_FLINT = REGISTRY.register("core_flint", () -> new CoreFlintItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
     public static final RegistryObject<Item> DRAGON_FLUTE = REGISTRY.register("dragon_flute", () -> new DragonFluteItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<Item> YAMATO_FRAGMENT = REGISTRY.register("yamato_fragment", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> ABYSS_FRAGMENT = REGISTRY.register("abyss_fragment", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<Item> DESERT_FRAGMENT = REGISTRY.register("desert_fragment", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<Item> ENDER_FRAGMENT = REGISTRY.register("ender_fragment", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<Item> MECH_FRAGMENT = REGISTRY.register("mech_fragment", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<Item> NETHERITE_FRAGMENT = REGISTRY.register("netherite_fragment", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<Item> FLAME_FRAGMENT = REGISTRY.register("flame_fragment", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<Item> STORM_FRAGMENT = REGISTRY.register("storm_fragment", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<Item> SOUL_FRAGMENT = REGISTRY.register("soul_fragment", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> ABYSS_FRAGMENT = REGISTRY.register("abyss_fragment", () -> new CataclysmHumanoidBossDropItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), TCRBossEntities.LEVIATHAN_HUMANOID::get));
+    public static final RegistryObject<Item> DESERT_FRAGMENT = REGISTRY.register("desert_fragment", () -> new CataclysmHumanoidBossDropItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), TCRBossEntities.ANCIENT_REMNANT_HUMANOID::get));
+    public static final RegistryObject<Item> ENDER_FRAGMENT = REGISTRY.register("ender_fragment", () -> new CataclysmHumanoidBossDropItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), TCRBossEntities.ENDER_GUARDIAN_HUMANOID::get));
+    public static final RegistryObject<Item> MECH_FRAGMENT = REGISTRY.register("mech_fragment", () -> new CataclysmHumanoidBossDropItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), TCRBossEntities.HARBINGER_HUMANOID::get));
+    public static final RegistryObject<Item> NETHERITE_FRAGMENT = REGISTRY.register("netherite_fragment", () -> new CataclysmHumanoidBossDropItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), TCRBossEntities.NETHERITE_HUMANOID::get));
+    public static final RegistryObject<Item> FLAME_FRAGMENT = REGISTRY.register("flame_fragment", () -> new CataclysmHumanoidBossDropItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), TCRBossEntities.IGNIS_HUMANOID::get));
+    public static final RegistryObject<Item> STORM_FRAGMENT = REGISTRY.register("storm_fragment", () -> new CataclysmHumanoidBossDropItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), TCRBossEntities.SCYLLA_HUMANOID::get));
+    public static final RegistryObject<Item> SOUL_FRAGMENT = REGISTRY.register("soul_fragment", () -> new CataclysmHumanoidBossDropItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), TCRBossEntities.MALEDICTUS_HUMANOID::get));
 
     public static final RegistryObject<Item> RESONANCE_STONE = REGISTRY.register("resonance_stone", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
 
@@ -123,7 +123,7 @@ public class TCRItems {
                     }))
     );
 
-    public static final RegistryObject<Item> STONE_OF_REINCARNATION = REGISTRY.register("stone_of_reincarnation", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), true));
+    public static final RegistryObject<Item> STONE_OF_REINCARNATION = REGISTRY.register("stone_of_reincarnation", () -> new StoneOfReincarnationItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> MYSTERIOUS_WEAPONS = REGISTRY.register("mysterious_weapons", () -> new SimpleDescriptionItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), true));
 

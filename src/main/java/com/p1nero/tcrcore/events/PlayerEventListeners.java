@@ -1,6 +1,8 @@
 package com.p1nero.tcrcore.events;
 
 import com.aetherteam.aether.data.resources.registries.AetherDimensions;
+import com.brass_amber.ba_bt.entity.hostile.golem.EndGolem;
+import com.brass_amber.ba_bt.init.BTEntityType;
 import com.github.L_Ender.cataclysm.init.ModItems;
 import com.hm.efn.EFN;
 import com.hm.efn.gameasset.EFNSkills;
@@ -16,6 +18,7 @@ import com.p1nero.tcrcore.datagen.TCRAdvancementData;
 import com.p1nero.tcrcore.effect.TCREffects;
 import com.p1nero.tcrcore.entity.TCREntities;
 import com.p1nero.tcrcore.entity.custom.fake_npc.fake_boss.FakeBossNpc;
+import com.p1nero.tcrcore.entity.custom.fake_npc.fake_end_golem.FakeEndGolem;
 import com.p1nero.tcrcore.item.TCRItems;
 import com.p1nero.tcrcore.network.TCRPacketHandler;
 import com.p1nero.tcrcore.network.packet.clientbound.CSTipPacket;
@@ -32,6 +35,7 @@ import com.yesman.epicskills.registry.entry.EpicSkillsItems;
 import com.yesman.epicskills.registry.entry.EpicSkillsSkillTrees;
 import com.yesman.epicskills.skilltree.SkillTree;
 import com.yesman.epicskills.world.capability.SkillTreeProgression;
+import com.yungnickyoung.minecraft.betterendisland.world.IDragonFight;
 import net.blay09.mods.waystones.block.ModBlocks;
 import net.genzyuro.uniqueaccessories.registry.UAItems;
 import net.minecraft.ChatFormatting;
@@ -47,6 +51,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -446,6 +451,20 @@ public class PlayerEventListeners {
                 if (TCRQuestManager.hasQuest(serverPlayer, TCRQuests.GO_TO_THE_END)) {
                     TCRQuests.GO_TO_THE_END.finish(serverPlayer, true);
                     TCRQuests.GET_VOID_EYE.start(serverPlayer);
+                    ServerLevel end = serverPlayer.server.getLevel(Level.END);
+                    if(end != null) {
+                        IDragonFight dragonFight = (IDragonFight)end.getDragonFight();
+                        if(dragonFight != null) {
+                            dragonFight.betterendisland$reset(true);
+                            //移除末地傀儡和末地假傀儡和石碑
+                            List<EndGolem> list1 = List.copyOf(end.getEntities(BTEntityType.END_GOLEM.get(), LivingEntity::isAlive));
+                            list1.forEach(Entity::discard);
+                            List<FakeEndGolem> list2 = List.copyOf(end.getEntities(TCREntities.FAKE_END_GOLEM.get(), LivingEntity::isAlive));
+                            list2.forEach(Entity::discard);
+                            List<Entity> list3 = List.copyOf(end.getEntities(BTEntityType.END_MONOLITH.get(), Entity::isAlive));
+                            list3.forEach(Entity::discard);
+                        }
+                    }
                 }
             }
             if (event.getTo().equals(PBF1Dimensions.SANCTUM_OF_THE_BATTLE_LEVEL_KEY)) {
@@ -457,8 +476,18 @@ public class PlayerEventListeners {
             //维度没有人就重制末影龙，方便多人
             if (event.getFrom().equals(Level.END)) {
                 ServerLevel end = serverPlayer.server.getLevel(Level.END);
-                if (end != null && end.players().isEmpty() && end.getDragonFight() != null) {
-                    end.getDragonFight().tryRespawn();
+                if (end != null && end.players().isEmpty()) {
+                    IDragonFight dragonFight = (IDragonFight)end.getDragonFight();
+                    if(dragonFight != null) {
+                        dragonFight.betterendisland$reset(true);
+                        //移除末地傀儡和末地假傀儡和石碑
+                        List<EndGolem> list1 = List.copyOf(end.getEntities(BTEntityType.END_GOLEM.get(), LivingEntity::isAlive));
+                        list1.forEach(Entity::discard);
+                        List<FakeEndGolem> list2 = List.copyOf(end.getEntities(TCREntities.FAKE_END_GOLEM.get(), LivingEntity::isAlive));
+                        list2.forEach(Entity::discard);
+                        List<Entity> list3 = List.copyOf(end.getEntities(BTEntityType.END_MONOLITH.get(), Entity::isAlive));
+                        list3.forEach(Entity::discard);
+                    }
                 }
             }
 

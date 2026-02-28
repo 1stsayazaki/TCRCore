@@ -463,7 +463,12 @@ public class LivingEntityEventListeners {
                 EntityType<BTMonolith> entityType = GolemType.getMonolithFor(abstractGolem.golemType);
                 Item item = getMonolithKeyItemFor(abstractGolem.golemType);
                 BlockPos home = livingEntity.getEntityData().get(((AbstractGolemInvoker)livingEntity).getSpawnPosKey());
-                entityType.spawn(serverLevel, home, MobSpawnType.MOB_SUMMONED);
+                if(entityType == BTEntityType.END_MONOLITH.get()) {
+                    BlockPos pos = WorldUtil.getSurfaceBlockPos(serverLevel, 0, 0).above(3);
+                    entityType.spawn(serverLevel, pos, MobSpawnType.MOB_SUMMONED);
+                } else {
+                    entityType.spawn(serverLevel, home, MobSpawnType.MOB_SUMMONED);
+                }
                 ItemUtil.addItemEntity(livingEntity, item, 1, ChatFormatting.GOLD.getColor());
             }
 
@@ -678,13 +683,6 @@ public class LivingEntityEventListeners {
             AttributeModifier healthBoost = new AttributeModifier(uuid, "Dragon Health Boost", -0.6, AttributeModifier.Operation.MULTIPLY_BASE);
             enderDragon.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(healthBoost);
             enderDragon.setHealth(enderDragon.getMaxHealth());
-
-            //移除末地傀儡和末地假傀儡
-            List<EndGolem> list1 = List.copyOf(serverLevel.getEntities(BTEntityType.END_GOLEM.get(), LivingEntity::isAlive));
-            list1.forEach(Entity::discard);
-            List<FakeEndGolem> list2 = List.copyOf(serverLevel.getEntities(TCREntities.FAKE_END_GOLEM.get(), LivingEntity::isAlive));
-            list2.forEach(Entity::discard);
-
         }
 
         //血给多点，假装很强大
