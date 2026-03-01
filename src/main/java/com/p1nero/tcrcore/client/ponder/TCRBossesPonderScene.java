@@ -2,6 +2,7 @@ package com.p1nero.tcrcore.client.ponder;
 
 import com.aetherteam.aether.block.AetherBlocks;
 import com.almostreliable.summoningrituals.altar.AltarBlockEntity;
+import com.cerbon.bosses_of_mass_destruction.item.BMDItems;
 import com.github.L_Ender.cataclysm.init.ModItems;
 import com.hm.efn.registries.EFNItem;
 import com.p1nero.p1nero_ec.gameassets.PECAnimations;
@@ -15,14 +16,11 @@ import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 
@@ -681,13 +679,7 @@ public class TCRBossesPonderScene {
         ItemStack item1 = new ItemStack(TCRItems.ABYSS_CORE.get(), 1);
         ItemStack item2 = new ItemStack(Items.CONDUIT, 1);
         ItemStack item3 = new ItemStack(ModItems.CORAL_CHUNK.get(), 3);
-        Item ModItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation("irons_spellbooks:ruined_book"));
-        ItemStack item4;
-        if (ModItem != null) {
-            item4 = new ItemStack(ModItem, 1);
-        } else {
-            item4 = ItemStack.EMPTY;
-        }
+        ItemStack item4 = new ItemStack(ItemRegistry.RUINED_BOOK.get(), 1);
 
         scene.configureBasePlate(0, 0, 5);
         scene.showBasePlate();
@@ -820,13 +812,7 @@ public class TCRBossesPonderScene {
         ItemStack item2 = new ItemStack(Items.ICE, 11);
         ItemStack item3 = new ItemStack(ModItems.CURSIUM_INGOT.get(), 1);
         ItemStack item4 = new ItemStack(ModItems.STRANGE_KEY.get(), 3);
-        Item ModItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation("bosses_of_mass_destruction:soul_star"));
-        ItemStack item5;
-        if (ModItem != null) {
-            item5 = new ItemStack(ModItem, 4);
-        } else {
-            item5 = ItemStack.EMPTY;
-        }
+        ItemStack item5 = new ItemStack(BMDItems.SOUL_STAR.get(), 4);
 
         scene.configureBasePlate(0, 0, 5);
         scene.showBasePlate();
