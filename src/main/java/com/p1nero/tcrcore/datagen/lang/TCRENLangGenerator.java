@@ -8,7 +8,6 @@ import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.block.TCRBlocks;
 import com.p1nero.tcrcore.client.TCRKeyMappings;
 import com.p1nero.tcrcore.dialog.custom.handler.no_entity.FirstEnterCloudlandScreenHandler;
-import com.p1nero.tcrcore.dialog.custom.handler.no_entity.ResetGameProgressScreenHandler;
 import com.p1nero.tcrcore.dialog.custom.handler.no_entity.StartScreenHandler;
 import com.p1nero.tcrcore.effect.TCREffects;
 import com.p1nero.tcrcore.entity.TCREntities;
@@ -89,7 +88,6 @@ public class TCRENLangGenerator extends TCRLangProvider {
 
         StartScreenHandler.onGenerateEN(this);
         FirstEnterCloudlandScreenHandler.onGenerateEN(this);
-        ResetGameProgressScreenHandler.onGenerateEN(this);
 
         this.add("item.domesticationinnovation.collar_tag.tcr_info", "It allows for special enchantments to be applied to pets.");
         this.addTCRItemInfo(net.blay09.mods.waystones.item.ModItems.warpStone, "Click the §6[Scroll]§r button in the inventory to teleport to activated waystones!");
@@ -114,6 +112,14 @@ public class TCRENLangGenerator extends TCRLangProvider {
         this.addSkill("fire_avoid", "Fire Avoidance Charm", "Immunity to fire damage!");
         this.addSkill("perfect_dodge", "Dodge Effect", "Play a cool animation when perfect dodge!");
 
+        this.add(TCRItems.ABYSS_FRAGMENT.get(), "Echo of the Abyssal Dirge");
+        this.add(TCRItems.DESERT_FRAGMENT.get(), "Echo of Forgotten Sands");
+        this.add(TCRItems.ENDER_FRAGMENT.get(), "Shard of the Final Verse");
+        this.add(TCRItems.MECH_FRAGMENT.get(), "Remains of the Perpetual Gear");
+        this.add(TCRItems.NETHERITE_FRAGMENT.get(), "Embers of the Quenched Molten Heart");
+        this.add(TCRItems.FLAME_FRAGMENT.get(), "Echo of the First Flame");
+        this.add(TCRItems.STORM_FRAGMENT.get(), "Shard of the Thunderous Roar");
+        this.add(TCRItems.SOUL_FRAGMENT.get(), "Dust of the Cursed Bone Prison");
         this.add(TCRItems.STONE_OF_REINCARNATION.get(), "轮回之石");
         this.addItemUsageInfo(TCRItems.STONE_OF_REINCARNATION.get(), "");
         this.add(TCRItems.WITHER_SOUL_STONE.get(), "Wither Soul Stone");

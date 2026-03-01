@@ -10,7 +10,6 @@ import com.p1nero.tcrcore.block.TCRBlocks;
 import com.p1nero.tcrcore.capability.TCRQuests;
 import com.p1nero.tcrcore.client.TCRKeyMappings;
 import com.p1nero.tcrcore.dialog.custom.handler.no_entity.FirstEnterCloudlandScreenHandler;
-import com.p1nero.tcrcore.dialog.custom.handler.no_entity.ResetGameProgressScreenHandler;
 import com.p1nero.tcrcore.dialog.custom.handler.no_entity.StartScreenHandler;
 import com.p1nero.tcrcore.effect.TCREffects;
 import com.p1nero.tcrcore.entity.TCREntities;
@@ -186,7 +185,6 @@ public class TCRZHLangGenerator extends TCRLangProvider {
 
         StartScreenHandler.onGenerateZH(this);
         FirstEnterCloudlandScreenHandler.onGenerateZH(this);
-        ResetGameProgressScreenHandler.onGenerateZH(this);
 
         this.add("item.domesticationinnovation.collar_tag.tcr_info", "可进行特殊附魔，并将附魔应用于宠物身上。");
         this.addTCRItemInfo(net.blay09.mods.waystones.item.ModItems.warpStone, "点击物品栏中的传送卷轴按钮以进行传送。");
@@ -211,6 +209,16 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.addSkill("fire_avoid", "避火咒", "免疫火焰伤害！");
         this.addSkill("perfect_dodge", "闪避特效", "完美闪避时将有帅气的动作！");
 
+        this.add(TCRItems.DIVINE_FRAGMENT.get(), "神性碎片");
+        this.addItemUsageInfo(TCRItems.DIVINE_FRAGMENT.get(), "上面记载了神的意志");
+        this.add(TCRItems.ABYSS_FRAGMENT.get(), "渊海葬歌的回响");
+        this.add(TCRItems.DESERT_FRAGMENT.get(), "遗忘之沙的回响");
+        this.add(TCRItems.ENDER_FRAGMENT.get(), "终末之诗的残片");
+        this.add(TCRItems.MECH_FRAGMENT.get(), "永动齿轮的残骸");
+        this.add(TCRItems.NETHERITE_FRAGMENT.get(), "熔心淬火的余烬");
+        this.add(TCRItems.FLAME_FRAGMENT.get(), "初火残响");
+        this.add(TCRItems.STORM_FRAGMENT.get(), "雷渊怒吼的碎片");
+        this.add(TCRItems.SOUL_FRAGMENT.get(), "咒骨囚魂的遗尘");
         this.add(TCRItems.STONE_OF_REINCARNATION.get(), "轮回之石");
         this.addItemUsageInfo(TCRItems.STONE_OF_REINCARNATION.get(), "");
         this.add(TCRItems.WITHER_SOUL_STONE.get(), "凋灵魂石");
