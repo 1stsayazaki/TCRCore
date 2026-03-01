@@ -734,7 +734,7 @@ public class TCRBossesPonderScene {
 
         scene.idle(20);
         scene.overlay().showText(20)
-                .text(catalyst.getItem().getDescription().getString() + " × " + catalyst.getCount())
+                .text(item4.getItem().getDescription().getString() + " × " + item4.getCount())
                 .attachKeyFrame()
                 .pointAt(altarSurface)
                 .placeNearTarget();
@@ -883,7 +883,7 @@ public class TCRBossesPonderScene {
 
         scene.idle(20);
         scene.overlay().showText(20)
-                .text(catalyst.getItem().getDescription().getString() + " × " + catalyst.getCount())
+                .text(item5.getItem().getDescription().getString() + " × " + item5.getCount())
                 .attachKeyFrame()
                 .pointAt(altarSurface)
                 .placeNearTarget();
