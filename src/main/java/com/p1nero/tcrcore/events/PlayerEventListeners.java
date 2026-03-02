@@ -352,7 +352,8 @@ public class PlayerEventListeners {
                 }
 
                 if (event.getDimension() == TCRDimensions.REAL_LEVEL_KEY) {
-                    if (!(TCRQuests.TALK_TO_AINE_GAME_CLEAR.isFinished(serverPlayer) || TCRQuestManager.hasQuest(serverPlayer, TCRQuests.TALK_TO_AINE_GAME_CLEAR))) {
+                    //卡在中间，只有击败最终boss才能进，后日谈完成后也不能进
+                    if (TCRQuests.TALK_TO_AINE_GAME_CLEAR.isFinished(serverPlayer) || !TCRQuests.KILL_MAD_CHRONOS.isFinished(serverPlayer)) {
                         event.setCanceled(true);
                         serverPlayer.displayClientMessage(TCRCoreMod.getInfo("can_not_do_this_too_early"), true);
                     }

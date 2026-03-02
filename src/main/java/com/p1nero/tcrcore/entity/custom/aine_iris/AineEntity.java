@@ -176,6 +176,7 @@ public class AineEntity extends PathfinderMob implements IEntityNpc, GeoEntity, 
             return dialogueScreenBuilder.build();
         } else if (TCRQuests.TALK_TO_AINE_MAGIC_2.equals(currentQuest)) {
             TCRCoreMod.LOGGER.debug("TALK_TO_AINE_MAGIC_2 Start");
+            //NOTE 虽然不知道为嘛，但是我加了个try catch它就修好了= =，移除可能导致对话bug
             try {
                 //介绍施法
                 DialogNode learnt = new DialogNode(dBuilder.ans(22, TCRItems.MAGIC_BOTTLE.get().getDescription().copy().withStyle(ChatFormatting.AQUA), TCRItems.MAGIC_BOTTLE.get().getDescription().copy().withStyle(ChatFormatting.AQUA)), dBuilder.opt(9))
