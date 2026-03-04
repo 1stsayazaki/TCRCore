@@ -5,6 +5,7 @@ import com.p1nero.tcrcore.TCRCoreMod;
 import com.p1nero.tcrcore.network.packet.clientbound.*;
 import com.p1nero.tcrcore.network.packet.serverbound.EndScreenCallbackPacket;
 import com.p1nero.tcrcore.network.packet.serverbound.ExecuteRiptidePacket;
+import com.p1nero.tcrcore.network.packet.serverbound.ExitSpectatorPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ModList;
@@ -40,6 +41,7 @@ public class TCRPacketHandler {
 
         register(EndScreenCallbackPacket.class, EndScreenCallbackPacket::decode);
         register(ExecuteRiptidePacket.class, ExecuteRiptidePacket::decode);
+        register(ExitSpectatorPacket.class, ExitSpectatorPacket::decode);
 
         register(RefreshClientQuestsPacket.class, RefreshClientQuestsPacket::decode);
 

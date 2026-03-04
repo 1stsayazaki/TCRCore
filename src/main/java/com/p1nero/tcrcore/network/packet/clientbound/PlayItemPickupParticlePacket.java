@@ -6,9 +6,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-/**
- * 手动加残影，server level的sendParticle发到客户端会暗改参数
- */
 public record PlayItemPickupParticlePacket(ItemStack itemStack) implements BasePacket {
 
     @Override

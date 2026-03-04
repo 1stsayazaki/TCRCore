@@ -203,6 +203,7 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.add("key.categories." + TCRCoreMod.MOD_ID, "远梦之棺 —— 核心");
         this.addKeyMapping(TCRKeyMappings.RIPTIDE, "激流");
         this.addKeyMapping(TCRKeyMappings.SHOW_QUESTS, "隐藏/显示指引");
+        this.addKeyMapping(TCRKeyMappings.EXIT_SPECTATOR, "退出观察者模式");
 
         this.add("skill_tree.sword_soaring.unlock_tip", "推进主线任务习得");
         this.add("unlock_tip.tcrcore.battleborn.water_avoid1", "使用§d[紫水晶块]§f向§6[呱呱]§f交易习得");
@@ -263,6 +264,8 @@ public class TCRZHLangGenerator extends TCRLangProvider {
         this.add(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "神谕残卷");
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "§c§kI'm Your...");
 
+        this.addInfo("creative_may_lost_progress", "警告！创造模式下击败boss将无法推进游戏进度！");
+        this.addInfo("exit_spectator_in_pbf1", "按[%s]以退出观察者模式并回到主城");
         this.addInfo("cataclysm_humanoid_drop_desc", "于[%s]击败[%s]掉落");
         this.addInfo("can_not_use_scroll_directly","请将法术附魔在武器上以使用！！");
         this.addInfo("quest_updated","当前追踪的任务已更新！");

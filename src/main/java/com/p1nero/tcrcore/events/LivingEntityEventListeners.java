@@ -93,6 +93,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.sonmok14.fromtheshadows.server.entity.mob.BulldrogiothEntity;
 import org.merlin204.wraithon.entity.wraithon.WraithonEntity;
 import org.merlin204.wraithon.worldgen.WraithonDimensions;
@@ -184,6 +185,11 @@ public class LivingEntityEventListeners {
 
         //附近玩家都处理击败
         livingEntity.level().getEntitiesOfClass(ServerPlayer.class, (new AABB(center, center)).inflate(30)).forEach(player -> {
+
+            if(FMLEnvironment.production && (player.isSpectator() || player.isCreative())) {
+                player.displayClientMessage(TCRCoreMod.getInfo("creative_may_lost_progress").withStyle(ChatFormatting.RED), false);
+                return;
+            }
 
             //击败祭坛内的boss
             if (livingEntity instanceof Scylla_Entity) {

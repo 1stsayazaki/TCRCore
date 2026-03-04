@@ -63,6 +63,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -349,8 +350,8 @@ public class PlayerEventListeners {
                         boolean hasNonCreativeOrSpectator = targetLevel.players().stream()
                                 .anyMatch(p -> !p.isCreative() && !p.isSpectator());
                         if (hasNonCreativeOrSpectator) {
-                            event.setCanceled(true);
                             serverPlayer.displayClientMessage(TCRCoreMod.getInfo("dim_max_players"), true);
+                            serverPlayer.setGameMode(GameType.SPECTATOR);
                         }
                     }
                 }

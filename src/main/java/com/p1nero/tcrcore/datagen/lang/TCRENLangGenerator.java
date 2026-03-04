@@ -205,6 +205,7 @@ public class TCRENLangGenerator extends TCRLangProvider {
         this.add("key.categories." + TCRCoreMod.MOD_ID, "The Casket of Reveries — Core");
         this.addKeyMapping(TCRKeyMappings.RIPTIDE, "Riptide");
         this.addKeyMapping(TCRKeyMappings.SHOW_QUESTS, "Show/Hide Task");
+        this.addKeyMapping(TCRKeyMappings.EXIT_SPECTATOR, "Exit Spectator Mode");
 
         this.add("skill_tree.sword_soaring.unlock_tip", "Unlocked by Advancing the main quest");
         this.add("unlock_tip.tcrcore.battleborn.water_avoid1", "Learned by trading with §6[Ribbit]§f using §d[Block of Amethyst]§f");
@@ -265,6 +266,8 @@ public class TCRENLangGenerator extends TCRLangProvider {
         this.add(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "Oracle Fragment");
         this.addItemUsageInfo(TCRItems.ANCIENT_ORACLE_FRAGMENT.get(), "§c§kI'm Your...");
 
+        this.addInfo("creative_may_lost_progress", "Warning: Defeating the boss in Creative Mode will not progress the game!");
+        this.addInfo("exit_spectator_in_pbf1", "Press [%s] to exit Spectator Mode and return to the main hub.");
         this.addInfo("cataclysm_humanoid_drop_desc", "Dropped at [%s] by defeating [%s]");
         this.addInfo("can_not_use_scroll_directly", "Please enchant the spell to a weapon to use it!!");
         this.addInfo("quest_updated","Current Quest Updated!");

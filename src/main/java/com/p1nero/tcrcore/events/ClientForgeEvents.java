@@ -1,16 +1,23 @@
 package com.p1nero.tcrcore.events;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.obscuria.obscureapi.api.BossBarsRenderManager;
+import com.p1nero.battle_field1.worldgen.PBF1Dimensions;
 import com.p1nero.dialog_lib.events.ClientNpcEntityDialogueEvent;
 import com.p1nero.tcrcore.TCRCoreMod;
+import com.p1nero.tcrcore.client.TCRKeyMappings;
 import com.p1nero.tcrcore.client.gui.*;
 import com.p1nero.tcrcore.dialog.custom.handler.HandleIronGolemDialog;
 import com.p1nero.tcrcore.dialog.custom.handler.HandleVillagerDialog;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.LevelLoadingScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.npc.Villager;
@@ -78,6 +85,15 @@ public class ClientForgeEvents {
         if(!Minecraft.getInstance().isPaused() && Minecraft.getInstance().screen == null && Minecraft.getInstance().player != null) {
             CustomQuestOverlayRenderer.render(Minecraft.getInstance().player, event.getGuiGraphics(), event.getPartialTick());
             BTSpawnerBlockIndicatorRenderer.render(Minecraft.getInstance().player, event.getGuiGraphics(), event.getPartialTick());
+            if(Minecraft.getInstance().player.level().dimension() == PBF1Dimensions.SANCTUM_OF_THE_BATTLE_LEVEL_KEY && Minecraft.getInstance().player.isSpectator()) {
+                MutableComponent component = TCRCoreMod.getInfo("exit_spectator_in_pbf1", TCRKeyMappings.EXIT_SPECTATOR.getTranslatedKeyMessage().copy().withStyle(ChatFormatting.GOLD));
+                GuiGraphics guiGraphics = event.getGuiGraphics();
+                Font font = Minecraft.getInstance().font;
+                PoseStack poseStack = guiGraphics.pose();
+                poseStack.pushPose();
+                guiGraphics.drawString(font, component, 10, 10, 0xFFFFFF, true);
+                poseStack.popPose();
+            }
         }
     }
 
