@@ -2,6 +2,7 @@ package com.p1nero.tcrcore.datagen;
 
 import com.p1nero.tcrcore.datagen.tags.TCRItemTags;
 import com.p1nero.tcrcore.item.TCRItems;
+import io.redspace.ironsspellbooks.registries.ItemRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -39,6 +40,66 @@ public class TCRRecipeGenerator extends TCRRecipeProvider implements IConditionB
                 .requires(TCRItems.ENDER_FRAGMENT.get())
                 .requires(TCRItems.NETHERITE_FRAGMENT.get())
                 .requires(TCRItems.DIVINE_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.ICE_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.SOUL_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.BLOOD_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.SOUL_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.FIRE_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.FLAME_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.PROTECTION_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.NETHERITE_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.COOLDOWN_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.ENDER_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.ENDER_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.ENDER_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.NATURE_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.DESERT_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.LIGHTNING_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.STORM_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.MANA_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.ABYSS_FRAGMENT.get())
+                .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.EVOCATION_UPGRADE_ORB.get(), 1)
+                .requires(ItemRegistry.ARCANE_ESSENCE.get())
+                .requires(TCRItems.MECH_FRAGMENT.get())
                 .unlockedBy(getHasName(TCRItems.WITHER_SOUL_STONE.get()), has(TCRItems.WITHER_SOUL_STONE.get()))
                 .save(consumer);
     }

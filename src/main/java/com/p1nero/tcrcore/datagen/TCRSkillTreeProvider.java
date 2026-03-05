@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 public class TCRSkillTreeProvider extends SkillTreeProvider {
 
-    public static ResourceKey<SkillTree> MAGIC = ResourceKey.create(SkillTree.SKILL_TREE_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(TCRCoreMod.MOD_ID, "magic"));
+    public static final ResourceKey<SkillTree> MAGIC = ResourceKey.create(SkillTree.SKILL_TREE_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(TCRCoreMod.MOD_ID, "magic"));
 
     public TCRSkillTreeProvider(PackOutput pOutput) {
         super(pOutput);
@@ -63,7 +63,7 @@ public class TCRSkillTreeProvider extends SkillTreeProvider {
 
         SkillTreePageBuilder.SkillTreeNodeBuilder nodeBuilder = pageBuilder.newNode(EFSISSSkills.CONNECT_ROOT)
                 .position(centerX, centerY)
-                .abilityPointsRequirement(5);
+                .abilityPointsRequirement(10);
 
         // 为每个外围技能添加父节点，转折点设置在中心点与技能点的中点
         for (int i = 0; i < skills.length; i++) {

@@ -195,7 +195,6 @@ public class LivingEntityEventListeners {
             if (livingEntity instanceof Scylla_Entity) {
                 if (!PlayerDataManager.stormEyeKilled.get(player)) {
                     givePlayerAward(player, 2);
-                    ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.stormEyeKilled.put(player, true);
                 }
             }
@@ -203,7 +202,6 @@ public class LivingEntityEventListeners {
             if (livingEntity instanceof Ignis_Entity) {
                 if (!PlayerDataManager.flameEyeKilled.get(player)) {
                     givePlayerAward(player, 5);
-                    ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.flameEyeKilled.put(player, true);
                 }
             }
@@ -211,7 +209,6 @@ public class LivingEntityEventListeners {
             if (livingEntity instanceof The_Leviathan_Entity) {
                 if (!PlayerDataManager.abyssEyeKilled.get(player)) {
                     givePlayerAward(player, 2);
-                    ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.abyssEyeKilled.put(player, true);
                 }
             }
@@ -219,7 +216,6 @@ public class LivingEntityEventListeners {
             if (livingEntity instanceof Maledictus_Entity) {
                 if (!PlayerDataManager.cursedEyeKilled.get(player)) {
                     givePlayerAward(player, 2);
-                    ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.cursedEyeKilled.put(player, true);
                 }
             }
@@ -227,7 +223,6 @@ public class LivingEntityEventListeners {
             if (livingEntity instanceof Ancient_Remnant_Entity) {
                 if (!PlayerDataManager.desertEyeKilled.get(player)) {
                     givePlayerAward(player, 2);
-                    ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.desertEyeKilled.put(player, true);
                 }
             }
@@ -235,7 +230,6 @@ public class LivingEntityEventListeners {
             if (livingEntity instanceof Ender_Guardian_Entity) {
                 if (!PlayerDataManager.voidEyeKilled.get(player)) {
                     givePlayerAward(player, 2);
-                    ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.voidEyeKilled.put(player, true);
                 }
             }
@@ -243,7 +237,6 @@ public class LivingEntityEventListeners {
             if (livingEntity instanceof Netherite_Monstrosity_Entity) {
                 if (!PlayerDataManager.monstEyeKilled.get(player)) {
                     givePlayerAward(player, 2);
-                    ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.monstEyeKilled.put(player, true);
                 }
             }
@@ -251,7 +244,6 @@ public class LivingEntityEventListeners {
             if (livingEntity instanceof The_Harbinger_Entity) {
                 if (!PlayerDataManager.mechEyeKilled.get(player)) {
                     givePlayerAward(player, 2);
-                    ItemUtil.addItemEntity(player, EpicSkillsItems.ABILIITY_STONE.get(), 5, ChatFormatting.GOLD.getColor());
                     PlayerDataManager.mechEyeKilled.put(player, true);
                 }
             }
