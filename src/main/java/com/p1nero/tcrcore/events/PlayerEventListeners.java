@@ -50,6 +50,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -62,6 +63,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
@@ -334,6 +336,17 @@ public class PlayerEventListeners {
             EpicFightCapabilities.getUnparameterizedEntityPatch(player, ServerPlayerPatch.class).ifPresent(serverPlayerPatch -> {
                 serverPlayerPatch.setStamina(serverPlayerPatch.getMaxStamina());
             });
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerBreak(PlayerEvent.BreakSpeed event) {
+        if (event.getEntity().isEyeInFluid(FluidTags.WATER) && !EnchantmentHelper.hasAquaAffinity(event.getEntity())) {
+            event.setNewSpeed(event.getOriginalSpeed() * 5);
+        }
+
+        if (!event.getEntity().onGround()) {
+            event.setNewSpeed(event.getOriginalSpeed() * 5);
         }
     }
 
