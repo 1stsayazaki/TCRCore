@@ -154,6 +154,20 @@
             "minecraft:the_nether",
             "minecraft:the_end"
         ],
+        "hostile": true,
+        "mincount": {
+            "amount": 39,
+            "hostile": true,
+            "perplayer": true
+        },
+        "result": "deny"
+    },
+    {
+        "dimension": [
+            "minecraft:overworld",
+            "minecraft:the_nether",
+            "minecraft:the_end"
+        ],
         "passive": true,
         "mincount": {
             "amount": 39,
