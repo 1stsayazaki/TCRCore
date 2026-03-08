@@ -510,6 +510,9 @@ public class LivingEntityEventListeners {
                         //防堆命机制
                         living.setHealth(living.getMaxHealth());
                         living.removeAllEffects();
+                        if(living instanceof PathfinderMob mob) {
+                            mob.setTarget(null);
+                        }
                     }
                 });
             }
@@ -739,6 +742,13 @@ public class LivingEntityEventListeners {
             AttributeModifier healthBoost = new AttributeModifier(uuid, "Wither Health Boost", 1, AttributeModifier.Operation.MULTIPLY_BASE);
             witherBoss.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(healthBoost);
             witherBoss.setHealth(witherBoss.getMaxHealth());
+        }
+
+        //保护措施
+        if(event.getEntity() instanceof WraithonEntity wraithonEntity) {
+            if(!serverLevel.getEntities(TCREntities.TCR_MIMIC.get(), LivingEntity::isAlive).isEmpty()) {
+                wraithonEntity.discard();
+            }
         }
 
     }
