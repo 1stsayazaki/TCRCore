@@ -160,13 +160,6 @@ public class TCRCoreMod {
 
     private void addPackFindersEvent(AddPackFindersEvent event) {
         if (event.getPackType() == PackType.CLIENT_RESOURCES) {
-            String name = "zh_cn_translation";
-            var resourcePath = ModList.get().getModFileById(MOD_ID).getFile().findResource("packs/" + name);
-            var pack = Pack.readMetaAndCreate(name, Component.literal("远梦之棺中文包"), true,
-                    (path) -> new PathPackResources(path, resourcePath, false), PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN);
-            event.addRepositorySource((packConsumer) -> packConsumer.accept(pack));
-        }
-        if (event.getPackType() == PackType.CLIENT_RESOURCES) {
             String name = "i18n";
             var resourcePath = ModList.get().getModFileById(MOD_ID).getFile().findResource("packs/" + name);
             var pack = Pack.readMetaAndCreate(name, TCRCoreMod.getInfo("i18n_pack"), true,

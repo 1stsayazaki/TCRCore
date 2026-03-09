@@ -513,6 +513,9 @@ public class LivingEntityEventListeners {
                         if(living instanceof PathfinderMob mob) {
                             mob.setTarget(null);
                         }
+                        if(living instanceof Bone_Chimera_Entity boneChimeraEntity) {
+                            boneChimeraEntity.setStanding(false);//重置阶段
+                        }
                     }
                 });
             }
